@@ -249,6 +249,8 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="framework\dialog\fwzSetup.h" />
+    <ClInclude Include="framework\dialog\resource.h" />
     <ClInclude Include="rocket\rocketControl.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -331,6 +333,12 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="audio\clinkster\player\ftol.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="framework\dialog\FWZ.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="framework\dialog\FWZ.APS" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
