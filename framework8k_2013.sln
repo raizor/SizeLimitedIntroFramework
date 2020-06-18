@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "framework8k", "framework\framework8k_2013.vcxproj", "{73805C53-F2FE-4AF5-B7D4-47A655016A1D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gs_rocket_spinner", "projects\gs_rocket_spinner\gs_rocket_spinner_8k_2013.vcxproj", "{9250480A-C257-4F68-B2B2-C4561D5DA672}"
+	ProjectSection(ProjectDependencies) = postProject
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D} = {73805C53-F2FE-4AF5-B7D4-47A655016A1D}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release Debug|Win32 = Release Debug|Win32
+		Release FastPack|Win32 = Release FastPack|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D}.Debug|Win32.ActiveCfg = Debug - Rocket|Win32
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D}.Debug|Win32.Build.0 = Debug - Rocket|Win32
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D}.Release Debug|Win32.ActiveCfg = Release Debug|Win32
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D}.Release Debug|Win32.Build.0 = Release Debug|Win32
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D}.Release FastPack|Win32.ActiveCfg = Release - Rocket|Win32
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D}.Release FastPack|Win32.Build.0 = Release - Rocket|Win32
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D}.Release|Win32.ActiveCfg = Release - Rocket|Win32
+		{73805C53-F2FE-4AF5-B7D4-47A655016A1D}.Release|Win32.Build.0 = Release - Rocket|Win32
+		{9250480A-C257-4F68-B2B2-C4561D5DA672}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9250480A-C257-4F68-B2B2-C4561D5DA672}.Debug|Win32.Build.0 = Debug|Win32
+		{9250480A-C257-4F68-B2B2-C4561D5DA672}.Release Debug|Win32.ActiveCfg = Release Debug|Win32
+		{9250480A-C257-4F68-B2B2-C4561D5DA672}.Release Debug|Win32.Build.0 = Release Debug|Win32
+		{9250480A-C257-4F68-B2B2-C4561D5DA672}.Release FastPack|Win32.ActiveCfg = Release FastPack|Win32
+		{9250480A-C257-4F68-B2B2-C4561D5DA672}.Release FastPack|Win32.Build.0 = Release FastPack|Win32
+		{9250480A-C257-4F68-B2B2-C4561D5DA672}.Release|Win32.ActiveCfg = Release|Win32
+		{9250480A-C257-4F68-B2B2-C4561D5DA672}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,491 @@
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Mesh Extrusion</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="../css/style_no_stats.css">
+		<style type="text/css">
+			body {
+				background:#000000;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="infobutton">
+			<a href="javascript:toggleInfo()"><img src="../general/i.png" border="0"></a>
+		</div>
+		<div id="info">
+				<B>Mesh Extrusion - WebGL(html5)</B>
+				<P>Some shader doodling, inspired by <a href="http://vimeo.com/13175129" target="_blank">some test by Lars Berg</a>.</P>
+				Done using <a href="https://github.com/mrdoob/three.js" target="_blank">three.js</a>.
+				<P><B>Note.</B> You need a modern browser that supports WebGL for this to run the way it is intended.<BR>
+				For example. <a href="http://www.google.com/landing/chrome/beta/" target="_blank">Google Chrome 9+</a> or <a href="http://www.mozilla.com/firefox/beta/" target="_blank">Firefox 4+</a>.<BR><BR>(If you are already using one of those browsers and it's still not running, it's possible that you<BR>have old blacklisted GPU drivers. Try updating the drivers for your graphic card.<BR>Or try to set a '--ignore-gpu-blacklist' switch for the browser.)</P>
+				<font color="#777777">(C) OutsideOfSociety 2013.
+		</div>
+
+		<script src="../build_r58/three.min.js"></script>
+
+		<script src="js/shaders/CopyShader.js"></script>
+		<script src="js/shaders/SSAOShader.js"></script>
+		<script src="js/shaders/FXAAShader.js"></script>
+		<script src="js/shaders/ConvolutionShader.js"></script>
+		<script src="js/shaders/VignetteShader.js"></script>
+		
+		<script src="js/postprocessing/EffectComposer.js"></script>
+		<script src="js/postprocessing/RenderPass.js"></script>
+		<script src="js/postprocessing/MaskPass.js"></script>
+		<script src="js/postprocessing/ShaderPass.js"></script>
+		<script src="js/postprocessing/BloomPass.js"></script>
+
+		<script type="text/javascript" src="../general/info.js"></script>
+
+
+		<script type="x-shader/x-vertex" id="vertexshader">
+
+			attribute float time;
+			attribute vec3 direction;
+			attribute vec3 customColor;
+			attribute float seed;
+			attribute vec3 posNormal;
+			
+			uniform float globalTime;
+
+			varying vec3 vColor;
+			varying vec3 vNormal;
+			varying float extra;
+
+			const vec3 axisx = vec3(1.0, 0.0, 0.0);
+			const vec3 axisy = vec3(0.0, 1.0, 0.0);
+			const vec3 axisz = vec3(0.0, 0.0, 1.0);
+
+			const vec3 center = vec3(0.0, 0.0, 0.0);
+
+			const float strength = 150.0;
+
+			void main() {
+
+				vColor = customColor;
+				vNormal = normal;
+
+
+				// time
+				float localTime = time + globalTime;
+				float modTime = mod( localTime, 1.0 );
+				float accTime = modTime * modTime;
+
+				vec3 animated = vec3( position.x, position.y , position.z  );
+
+				vec3 directionVec = normalize(position);
+
+				float xangle = dot(axisx, directionVec) * 2.4;
+				float yangle = dot(axisy, directionVec) * 3.2;
+				float zangle = dot(axisz, directionVec) * 2.5;
+
+				//float cosx = cos(globalTime + xangle);
+				float sinx = sin(globalTime + xangle);
+				float cosy = cos(globalTime + yangle);
+				//float siny = sin(globalTime + yangle);
+				float cosz = cos(globalTime + zangle);
+				//float sinz = sin(globalTime + zangle);
+
+				vec3 animatedDirection = direction;
+
+                float mm = directionVec.z * sinx * cosy * cosz * strength;
+
+                if (mm < -10.0) {
+                	mm = -10.0;
+                }
+
+                animated += posNormal * mm;
+
+                animated += animatedDirection*(17.0-mm*0.1);
+
+                extra = max(0.0, mm*0.01 );
+
+				vec4 mvPosition = modelViewMatrix * vec4( animated, 1.0 );
+
+				gl_Position = projectionMatrix * mvPosition;
+
+			}
+
+		</script>
+
+		<script type="x-shader/x-fragment" id="fragmentshader">
+
+			uniform vec3 color;
+			uniform vec3 light;
+			uniform float depthPass;
+			
+			varying vec3 vColor;
+			varying vec3 vNormal;
+			varying vec3 light0Color;
+			varying float extra;
+
+			vec4 pack_depth( const in float depth ) {
+
+				const vec4 bit_shift = vec4( 256.0 * 256.0 * 256.0, 256.0 * 256.0, 256.0, 1.0 );
+				const vec4 bit_mask  = vec4( 0.0, 1.0 / 256.0, 1.0 / 256.0, 1.0 / 256.0 );
+				vec4 res = fract( depth * bit_shift );
+				res -= res.xxyz * bit_mask;
+				return res;
+
+			}
+
+			void main() {
+
+				float depth = gl_FragCoord.z / gl_FragCoord.w;
+				float near = 400.0;
+				float far = 600.0;
+				float depthcolor = 1.0 - smoothstep( near, far, depth );
+
+				vec3 l = light;
+				l = normalize(l);
+				float d0 = max(0.25,dot(vNormal, l));
+
+				vec3 extraColor = vec3(1.0, 1.0-extra, 1.0);
+
+				if (depthPass == 1.0) {
+					gl_FragColor = pack_depth( gl_FragCoord.z );
+				} else {
+					gl_FragColor = vec4( color * extraColor * vColor.xyz * d0 * depthcolor, 1.0 );
+				}
+				
+			}
+
+		</script>
+
+
+		<script>
+
+			var container;
+
+			var camera, scene, renderer;
+			var depthMaterial, depthTarget, composer, ssao, fxaa;
+
+			var has_gl = false;
+
+			var delta;
+			var time;
+			var oldTime;
+
+			var mainMesh;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				scene = new THREE.Scene();
+				
+				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.z = 500;
+				camera.lookAt(scene.position);
+				scene.add( camera );
+
+				var geo = new THREE.IcosahedronGeometry(90,4);
+				var material = new THREE.MeshPhongMaterial( {wireframe: false, shading: THREE.FlatShading} );
+				var mesh = new THREE.Mesh( geo, material );
+
+				var majorGeometry = new THREE.Geometry();
+
+				var cube = new THREE.CylinderGeometry(0.5,0.5,60,6,1,false);
+				
+				cube.applyMatrix( new THREE.Matrix4().setPosition( new THREE.Vector3( 0, -30, 0 ) ) );
+				cube.applyMatrix( new THREE.Matrix4().makeRotationFromEuler( new THREE.Vector3( Math.PI / 2, Math.PI/2, 0 ) ) );
+
+				var cubeMesh = new THREE.Mesh(cube);
+
+				var rotationArray = [];
+				var normalArray = [];
+
+				var center = new THREE.Vector3();
+
+				for (var i = 0; i < geo.vertices.length; i++) {
+					cubeMesh.position = geo.vertices[i];
+					cubeMesh.lookAt(scene.position);
+
+					rotationArray.push( cubeMesh.rotation.clone() );
+
+					normalArray.push( geo.vertices[i].clone().normalize() );
+
+					THREE.GeometryUtils.merge(majorGeometry, cubeMesh);
+				}
+
+				var attributes = {
+
+					customColor: { type: 'c', value: new THREE.Color( 0xffffff ) },
+					time:		 { type: 'f', value: [] },
+					direction:   { type: 'v3', value: [] },
+					seed:		 { type: 'f', value: [] },
+					posNormal:   { type: 'v3', value: [] },
+					
+				};
+
+				uniforms = {
+
+					color:      { type: "c", value: new THREE.Color( 0xffffff ) },
+					globalTime:	{ type: "f", value: 0.0 },
+					light: 		{ type: "v3", value: new THREE.Vector3( 1.0, 0.25, 1.0 ) },
+					depthPass:	{ type: "f", value: 0.0 },
+
+				};
+
+
+				var material = new THREE.ShaderMaterial( {
+
+					uniforms: 		uniforms,
+					attributes:     attributes,
+					vertexShader:   document.getElementById( 'vertexshader' ).textContent,
+					fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+
+					wireframe: 		false,
+					shading: 		THREE.FlatShading, 
+					
+				});
+
+
+				var vertices = majorGeometry.vertices;
+				var values_time = attributes.time.value;
+				var values_direction = attributes.direction.value;
+				var values_colors = attributes.customColor.value;
+				var values_seed = attributes.seed.value;
+				var values_normals = attributes.posNormal.value;
+
+				for( var v = 0; v < vertices.length; v+=16 ) {
+					
+					var t = Math.random();
+
+					values_time[ v ] = t;
+					values_time[ v+1 ] = t;
+					values_time[ v+2 ] = t;
+					values_time[ v+3 ] = t;
+					values_time[ v+4 ] = t;
+					values_time[ v+5 ] = t;
+					values_time[ v+6 ] = t;
+					values_time[ v+7 ] = t;
+
+					values_time[ v+8 ] = t;
+					values_time[ v+9 ] = t;
+					values_time[ v+10 ] = t;
+					values_time[ v+11 ] = t;
+					values_time[ v+12 ] = t;
+					values_time[ v+13 ] = t;
+					values_time[ v+14 ] = t;
+					values_time[ v+15 ] = t;
+
+					var testGeometry = new THREE.CylinderGeometry(1.0,0.4, 1, 6, 1);
+					testGeometry.applyMatrix( new THREE.Matrix4().setPosition( new THREE.Vector3( 0, -0.5, 0 ) ) );
+					testGeometry.applyMatrix( new THREE.Matrix4().makeRotationFromEuler( new THREE.Vector3( Math.PI / 2, Math.PI/2, 0 ) ) );
+				
+					var rot = rotationArray[Math.floor(v/16)];
+					
+					testGeometry.applyMatrix( new THREE.Matrix4().makeRotationFromEuler( rot ) );
+
+					values_direction[v] = testGeometry.vertices[0].clone();
+					values_direction[v+1] = testGeometry.vertices[1].clone();
+					values_direction[v+2] = testGeometry.vertices[2].clone();
+					values_direction[v+3] = testGeometry.vertices[3].clone();
+					values_direction[v+4] = testGeometry.vertices[4].clone();
+					values_direction[v+5] = testGeometry.vertices[5].clone();
+					values_direction[v+6] = testGeometry.vertices[6].clone();
+					values_direction[v+7] = testGeometry.vertices[7].clone();
+
+					values_direction[v+8] = testGeometry.vertices[8].clone();
+					values_direction[v+9] = testGeometry.vertices[9].clone();
+					values_direction[v+10] = testGeometry.vertices[10].clone();
+					values_direction[v+11] = testGeometry.vertices[11].clone();
+					values_direction[v+12] = testGeometry.vertices[12].clone();
+					values_direction[v+13] = testGeometry.vertices[13].clone();
+					values_direction[v+14] = testGeometry.vertices[14].clone();
+					values_direction[v+15] = testGeometry.vertices[15].clone();
+
+					var n = normalArray[Math.floor(v/16)];
+					values_normals[v] = n;
+					values_normals[v+1] = n;
+					values_normals[v+2] = n;
+					values_normals[v+3] = n;
+					values_normals[v+4] = n;
+					values_normals[v+5] = n;
+					values_normals[v+6] = n;
+					values_normals[v+7] = n;
+
+					values_normals[v+8] = n;
+					values_normals[v+9] = n;
+					values_normals[v+10] = n;
+					values_normals[v+11] = n;
+					values_normals[v+12] = n;
+					values_normals[v+13] = n;
+					values_normals[v+14] = n;
+					values_normals[v+15] = n;
+
+					var color = new THREE.Color( 0xffffff );
+					var color2 = new THREE.Color( 0x000000 );
+					values_colors[v] = color2;
+					values_colors[v+1] = color2;
+					values_colors[v+2] = color2;
+					values_colors[v+3] = color2;
+					values_colors[v+4] = color2;
+					values_colors[v+5] = color2;
+					values_colors[v+6] = color2;
+					values_colors[v+7] = color;
+
+					values_colors[v+8] = color;
+					values_colors[v+9] = color;
+					values_colors[v+10] = color;
+					values_colors[v+11] = color;
+					values_colors[v+12] = color;
+					values_colors[v+13] = color;
+					values_colors[v+14] = color2;
+					values_colors[v+15] = color;
+
+					var seed = Math.random();
+					values_seed[v] = seed;
+					values_seed[v+1] = seed;
+					values_seed[v+2] = seed;
+					values_seed[v+3] = seed;
+					values_seed[v+4] = seed;
+					values_seed[v+5] = seed;
+					values_seed[v+6] = seed;
+					values_seed[v+7] = seed;
+
+					values_seed[v+8] = seed;
+					values_seed[v+9] = seed;
+					values_seed[v+10] = seed;
+					values_seed[v+11] = seed;
+					values_seed[v+12] = seed;
+					values_seed[v+13] = seed;
+					values_seed[v+14] = seed;
+					values_seed[v+15] = seed;
+
+
+				}
+
+
+				mainMesh = new THREE.Mesh( majorGeometry, material );
+				mainMesh.frustumCulled = false;
+				scene.add(mainMesh);
+
+				try {
+					// renderer
+					renderer = new THREE.WebGLRenderer({antialias: true});
+					renderer.setSize( window.innerWidth, window.innerHeight );
+					renderer.setClearColor( 0x594662 );
+
+					renderer.autoClear = false;
+
+					// postprocessing
+					composer = new THREE.EffectComposer( renderer );
+					composer.addPass( new THREE.RenderPass( scene, camera ) );
+
+					depthTarget = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, { minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter, format: THREE.RGBAFormat } );
+
+					ssao = new THREE.ShaderPass( THREE.SSAOShader );
+					ssao.uniforms[ 'tDepth' ].value = depthTarget;
+					ssao.uniforms[ 'size' ].value.set( window.innerWidth, window.innerHeight );
+					ssao.uniforms[ 'cameraNear' ].value = 1;
+					ssao.uniforms[ 'cameraFar' ].value = 1000;
+					ssao.uniforms[ 'aoClamp' ].value = 0.5;
+					ssao.uniforms[ 'lumInfluence' ].value = 0.1;
+					ssao.uniforms[ 'onlyAO' ].value = 0;
+
+					composer.addPass( ssao );
+
+					var effectBloom = new THREE.BloomPass( 1.0 );
+					composer.addPass( effectBloom );
+
+					fxaa = new THREE.ShaderPass( THREE.FXAAShader );
+					fxaa.uniforms[ 'resolution' ].value = new THREE.Vector2( 1/window.innerWidth, 1/window.innerHeight );
+					composer.addPass( fxaa );
+
+					var effectVignette = new THREE.ShaderPass( THREE.VignetteShader );
+					effectVignette.uniforms[ "offset" ].value = 1.4;
+					effectVignette.uniforms[ "darkness" ].value = 1.3;
+					composer.addPass( effectVignette );
+
+					var effectCopy = new THREE.ShaderPass( THREE.CopyShader );
+					effectCopy.renderToScreen = true;
+					composer.addPass( effectCopy );
+
+					window.addEventListener( 'resize', onWindowResize, false );
+
+
+					container.appendChild( renderer.domElement );
+					has_gl = true;
+				}
+				catch (e) {
+					// need webgl
+					document.getElementById('info').innerHTML = "<P><BR><B>Note.</B> You need a modern browser that supports WebGL for this to run the way it is intended.<BR>For example. <a href='http://www.google.com/landing/chrome/beta/' target='_blank'>Google Chrome 9+</a> or <a href='http://www.mozilla.com/firefox/beta/' target='_blank'>Firefox 4+</a>.<BR><BR>If you are already using one of those browsers and still see this message, it's possible that you<BR>have old blacklisted GPU drivers. Try updating the drivers for your graphic card.<BR>Or try to set a '--ignore-gpu-blacklist' switch for the browser.</P><CENTER><BR><img src='../general/WebGL_logo.png' border='0'></CENTER>";
+					document.getElementById('info').style.display = "block";
+					return;
+				}
+
+			}
+
+			function onWindowResize( event ) {
+
+				var w = window.innerWidth;
+				var h = window.innerHeight;
+
+				renderer.setSize( w, h );
+
+				camera.aspect = w / h;
+				camera.updateProjectionMatrix();
+		
+				fxaa.uniforms[ 'resolution' ].value.set( 1 / w, 1 / h );
+				ssao.uniforms[ 'size' ].value.set( w, h );
+
+				composer.reset();
+				composer.setSize(w, h);
+				
+			}			
+
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				render();
+
+			}
+
+			function render() {
+
+				time = Date.now();
+				delta = time - oldTime;
+				oldTime = time;
+
+				if (isNaN(delta) || delta > 1000 || delta == 0 ) {
+					delta = 1000/60;
+				}
+
+				uniforms.globalTime.value += delta * 0.001;
+
+				mainMesh.rotation.y += delta*0.0003;
+				mainMesh.rotation.x += delta*0.00045;
+
+
+				if (has_gl) {
+
+					renderer.clear();
+					renderer.clearTarget(depthTarget);
+
+					uniforms.depthPass.value = 1.0;
+					renderer.render( scene, camera, depthTarget );
+
+					uniforms.depthPass.value = 0.0;
+					composer.render();
+
+				}
+
+			}
+
+		</script>
+	</body>
+</html>
