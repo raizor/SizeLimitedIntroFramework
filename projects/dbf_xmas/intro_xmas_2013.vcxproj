@@ -72,7 +72,7 @@
     <IntDir>build\obj\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)framework;$(DXSDK_DIR)\Include;$(SolutionDir)framework\src;$(ProjectDir);$(SolutionDir)framework\audio\clinkster\player;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)framework\libs;$(DXSDK_DIR)\Lib\x86;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)framework\libs;$(DXSDK_DIR)\Lib\x86;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)framework\build\bin\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">
     <OutDir>build\bin\$(Configuration)\</OutDir>
@@ -129,7 +129,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;Ws2_32.lib;dsound.lib;bass.lib;Shlwapi.lib;framework8k.lib;d3d9.lib;d3dx9.lib;sync.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;Ws2_32.lib;dsound.lib;bass.lib;Shlwapi.lib;framework.lib;d3d9.lib;d3dx9.lib;sync.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -339,12 +339,10 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="dialog\resource.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="zassert.h" />
     <ClInclude Include="direct3d.h" />
     <ClInclude Include="effects\terrain\terrain.h" />
-    <ClInclude Include="dialog\fwzSetup.h" />
     <ClInclude Include="intro.h" />
     <ClInclude Include="music\syncData.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_FastPack|Win32'">false</ExcludedFromBuild>
@@ -358,7 +356,6 @@
   <ItemGroup>
     <ClCompile Include="direct3d.cpp" />
     <ClCompile Include="effects\terrain\terrain.cpp" />
-    <ClCompile Include="dialog\fwzSetup.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="intro.cpp" />
     <ClCompile Include="main_deb.cpp">
@@ -397,9 +394,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="todo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="dialog\FWZ.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

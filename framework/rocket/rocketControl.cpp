@@ -3,9 +3,9 @@
 #include <windows.h>
 #include <math.h>
 #include "rocketControl.h"
-#include "..\src\framework\utils8k.h"
+#include "../framework/utils8k.h"
 
-#include "framework_config.h"
+#include "framework_intro_config.h"
 
 #ifdef ENABLE_ROCKET
 #ifdef SYNC_PLAYER

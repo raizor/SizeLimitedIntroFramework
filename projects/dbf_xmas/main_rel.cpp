@@ -21,8 +21,6 @@ float introLength = 0;
 
 static const char wndclass[] = "Merry Xmas DBF - Eventide";
 
-fwzSettings setup;
-
 static const PIXELFORMATDESCRIPTOR pfd =
     {
     sizeof(PIXELFORMATDESCRIPTOR),

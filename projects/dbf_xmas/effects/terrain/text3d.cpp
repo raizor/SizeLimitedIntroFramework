@@ -11,7 +11,6 @@
 #include "clinkster.h"
 #include "../../shader_code_intro.h"
 #include "config.h"
-#include "dialog/fwzSetup.h"
 #include "rocket/rocketControl.h"
 #include "music/syncData.h"
 #include "framework/gl/fbo.h"
@@ -27,9 +26,6 @@
 #include "framework/utils8k.h"
 
 #include "../../direct3d.h"
-
-
-extern fwzSettings setup;
 
 extern double rocketRow;
 extern ZVector sunPos;
@@ -96,7 +92,7 @@ text3d::text3d(void)
 	
 	// Selects The Font We Created
 	
-	SelectObject(setup.hDC, font);
+	SelectObject(RES_SETTINGS.hDC, font);
 	CreateGlyphMeshes();
 
 	int ti = 0;
@@ -341,7 +337,7 @@ void text3d::CreateGlyphMeshes()
 
 		float depth = 0.4f;
 
-		D3DXCreateTextA(d3dDevice, setup.hDC, charVal, 0.001f, depth, &dxMesh, &bufferAdjacency[i], glyphMetrics[i]);
+		D3DXCreateTextA(d3dDevice, RES_SETTINGS.hDC, charVal, 0.001f, depth, &dxMesh, &bufferAdjacency[i], glyphMetrics[i]);
 
 		numVertices[i] = 0;
 		numIndices[i] = 0;

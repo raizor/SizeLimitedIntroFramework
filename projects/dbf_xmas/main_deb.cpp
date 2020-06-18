@@ -20,7 +20,7 @@
 #include "framework/debug/scrubber.h"
 #include "../rocket/rocketControl.h"
 #include "framework/math/vector.h"
-#include "dialog/fwzSetup.h"
+#include "framework/dialog/fwzSetup.h"
 #define WIN32_LEAN_AND_MEAN
 #define WIN32_EXTRA_LEAN
 
@@ -35,8 +35,6 @@ bool addPoint = false;
 float introTimeSecs;
 float introLength = 0;
 bool paused;
-
-fwzSettings setup;
 
 int MOUSE_X;
 int MOUSE_Y;
@@ -223,8 +221,11 @@ static int window_init(fwzSettings* setup)
 	setup->scrBPP = 32;
 	setup->nVsync = 1;
 	setup->nMultisample = 0;
-
-	if (INTRO_DEBUG_USE_SETUP_DIALOG){
+	
+	USE_RES_SELECTOR = INTRO_DEBUG_USE_SETUP_DIALOG;
+		
+	if (USE_RES_SELECTOR){
+		
 		if (!OpenSetupDialog(setup)){
 			ExitProcess(0);
 		}
@@ -237,22 +238,7 @@ static int window_init(fwzSettings* setup)
 		setup->nAlwaysOnTop = 0;
 	}
 
-#ifdef DEBUG
-	// It's a fairly good idea not to set always-on-top when
-	// you're debugging, since otherwise it gets stuck
-	// on top your debug window.
-	
-	/*
-	
-
-*/
-	//if (!OpenSetupDialog(setup)) return -1;
-#else
-	if (!OpenSetupDialog(&setup)) return -1;
-#endif
-
-	//OpenSetupDialog(&setup);
-
+	// store res float values
 	RES_X = (float)setup->scrWidth;
 	RES_Y = (float)setup->scrHeight;
 
@@ -420,19 +406,19 @@ int WINAPI WinMain( HINSTANCE instance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	paused = false;
 	
-    setup.hInstance = GetModuleHandle( 0 );
+    RES_SETTINGS.hInstance = GetModuleHandle( 0 );
 
     //if( MessageBox( 0, "fullscreen?", info->wndclass, MB_YESNO|MB_ICONQUESTION)==IDYES ) info->full++;
 
-    if( !window_init(&setup) )
+    if( !window_init(&RES_SETTINGS) )
     {
-        window_end( &setup );
+        window_end( &RES_SETTINGS);
         MessageBox( 0, "window_init()!","error",MB_OK|MB_ICONEXCLAMATION );
         return( 0 );
     }
 	
-	scrubber = new Scrubber(setup.hWnd);
-	scrubber->SetWindowSize(setup.scrWidth, setup.scrHeight);
+	scrubber = new Scrubber(RES_SETTINGS.hWnd);
+	scrubber->SetWindowSize(RES_SETTINGS.scrWidth, RES_SETTINGS.scrHeight);
 
 	long to=timeGetTime();
 	
@@ -447,7 +433,7 @@ int WINAPI WinMain( HINSTANCE instance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	introLength = musicLengthSecs;
 
 	// init d3d - adding this call earlier causes a crash, not sure why.
-	initDirect3d(setup.hWnd);
+	initDirect3d(RES_SETTINGS.hWnd);
 	
 	// init intro
 	intro_init();
@@ -495,15 +481,15 @@ int WINAPI WinMain( HINSTANCE instance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
         intro_do( introTimeSecs );
 
-		DrawTime(&setup, introTimeSecs);
+		DrawTime(&RES_SETTINGS, introTimeSecs);
 		
 		scrubber->Draw(musicPosNormalized);
 
         //if( MMTime.u.sample >= MAX_SAMPLES ) done = 1;
-        SwapBuffers( setup.hDC );
+        SwapBuffers(RES_SETTINGS.hDC );
 	}
 
-    window_end( &setup );
+    window_end( &RES_SETTINGS);
 
     return( 0 );
 }

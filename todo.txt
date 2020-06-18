@@ -1,0 +1,1 @@
+Fix up res-selector - ability to override settings and not have dialog.

@@ -29,7 +29,7 @@
 #endif
 
 #include "framework/utils8k.h"
-#include "framework_config.h"
+#include "framework_intro_config.h"
 #include "global.h"
 
 GLuint vertexBufferPointGridID = 0;

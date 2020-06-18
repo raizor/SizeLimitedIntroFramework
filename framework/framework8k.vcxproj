@@ -17,7 +17,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{73805C53-F2FE-4AF5-B7D4-47A655016A1D}</ProjectGuid>
     <RootNamespace>i4k_OGL_4klang_vc2008</RootNamespace>
-    <ProjectName>framework8k</ProjectName>
+    <ProjectName>framework</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -257,30 +257,31 @@
     <ClInclude Include="rocket\sync\device.h" />
     <ClInclude Include="rocket\sync\sync.h" />
     <ClInclude Include="rocket\sync\track.h" />
-    <ClCompile Include="src\framework_config.cpp" />
-    <ClInclude Include="src\framework\gl\shader.h" />
-    <ClInclude Include="src\framework\assert.h" />
-    <ClInclude Include="src\framework\debug\audio.h">
+    <ClCompile Include="framework\dialog\fwzSetup.cpp" />
+    <ClCompile Include="framework_intro_config.cpp" />
+    <ClInclude Include="framework\gl\shader.h" />
+    <ClInclude Include="framework\assert.h" />
+    <ClInclude Include="framework\debug\audio.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="src\framework\debug\bass.h">
+    <ClInclude Include="framework\debug\bass.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="src\framework\debug\debugHelpers.h" />
-    <ClInclude Include="src\framework\debug\scrubber.h">
+    <ClInclude Include="framework\debug\debugHelpers.h" />
+    <ClInclude Include="framework\debug\scrubber.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="src\framework\debug\watchfile.h">
+    <ClInclude Include="framework\debug\watchfile.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="src\framework\effects\effect.h" />
-    <ClInclude Include="src\framework\gl\fbo.h" />
-    <ClInclude Include="src\framework\gl\gl8k.h" />
-    <ClInclude Include="src\framework\gl\glext.h" />
-    <ClInclude Include="src\framework\utils8k.h" />
-    <ClInclude Include="src\framework\math\matrix.h" />
-    <ClInclude Include="src\framework\math\vector.h" />
-    <ClInclude Include="src\framework_config.h" />
+    <ClInclude Include="framework\effects\effect.h" />
+    <ClInclude Include="framework\gl\fbo.h" />
+    <ClInclude Include="framework\gl\gl8k.h" />
+    <ClInclude Include="framework\gl\glext.h" />
+    <ClInclude Include="framework\utils8k.h" />
+    <ClInclude Include="framework\math\matrix.h" />
+    <ClInclude Include="framework\math\vector.h" />
+    <ClInclude Include="framework_intro_config.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="rocket\rocketControl.cpp">
@@ -299,23 +300,23 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\framework\gl\shader.cpp" />
-    <ClCompile Include="src\framework\debug\audio.cpp">
+    <ClCompile Include="framework\gl\shader.cpp" />
+    <ClCompile Include="framework\debug\audio.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\framework\debug\debugHelpers.cpp" />
-    <ClCompile Include="src\framework\debug\scrubber.cpp">
+    <ClCompile Include="framework\debug\debugHelpers.cpp" />
+    <ClCompile Include="framework\debug\scrubber.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\framework\debug\watchfile.cpp">
+    <ClCompile Include="framework\debug\watchfile.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\framework\effects\effect.cpp" />
-    <ClCompile Include="src\framework\gl\fbo.cpp" />
-    <ClCompile Include="src\framework\gl\gl8k.cpp" />
-    <ClCompile Include="src\framework\utils8k.cpp" />
-    <ClCompile Include="src\framework\math\matrix.cpp" />
-    <ClCompile Include="src\framework\math\vector.cpp" />
+    <ClCompile Include="framework\effects\effect.cpp" />
+    <ClCompile Include="framework\gl\fbo.cpp" />
+    <ClCompile Include="framework\gl\gl8k.cpp" />
+    <ClCompile Include="framework\utils8k.cpp" />
+    <ClCompile Include="framework\math\matrix.cpp" />
+    <ClCompile Include="framework\math\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="audio\clinkster\player\ftol.asm">
