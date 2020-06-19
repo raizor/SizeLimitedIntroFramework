@@ -2,14 +2,12 @@
 #define WIN32_EXTRA_LEAN
 
 #include "effect.h"
-
-#include <framework_intro_config.h>
+#include "framework_intro_config.h"
 
 #include "framework/utils8k.h"
 
 effect::effect()
 {
-
 
 }
 
