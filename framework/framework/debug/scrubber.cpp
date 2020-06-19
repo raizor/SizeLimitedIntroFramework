@@ -1,3 +1,4 @@
+#include "global.h"
 #include "scrubber.h"
 
 #ifdef ENABLE_SCRUBBER

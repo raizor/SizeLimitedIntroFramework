@@ -4,11 +4,13 @@
 
 #pragma once
 
+#include "global.h"
+
 //#define SETRESOLUTION
 
-#define ENABLE_ROCKET
-
 #define MUTE_AUDIO
+
+#define GRID_SIZE 256
 
 #ifdef DEBUG
 	#define ENABLE_SCRUBBER
@@ -24,4 +26,4 @@
 
 #define ENABLE_ZSTREQL
 
-#include "zassert.h"
+//INTRO_TITLE = "XMAS 2013";

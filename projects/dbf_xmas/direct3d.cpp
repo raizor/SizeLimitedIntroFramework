@@ -3,6 +3,8 @@
 #include "config.h"
 #include "direct3d.h"
 
+#include "framework/zassert.h"
+
 IDirect3D9 *d3dInterface = NULL;
 IDirect3DDevice9 *d3dDevice = NULL;
 

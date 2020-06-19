@@ -23,14 +23,8 @@
 #include <stdio.h>
 #endif
 
+#include "global.h"
 #include "framework/utils8k.h"
-
-struct ZPointGridVertex
-{
-	float x, y, z, w;
-	float fx, fy;
-	float dummy[2]; // 32 bytes
-};
 
 typedef unsigned int ZPointGridVertexIndex;
 
@@ -125,7 +119,7 @@ void particles::draw(float time, ZMatrix* modelviewMatrix, ZMatrix* projectionMa
 	glUniform1f(iLoc, time);
 
 	iLoc = glGetUniformLocation(shaderParticles->shaderProg, "aspectRatio");
-	glUniform1f(iLoc, ASPECT_RATIO);
+	glUniform1f(iLoc, AR);
 
 	float sz [] = {(float)RES_X, (float)RES_Y};
 	iLoc = glGetUniformLocation(shaderParticles->shaderProg, "viewportSize");

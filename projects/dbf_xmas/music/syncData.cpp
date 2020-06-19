@@ -1,8 +1,6 @@
 #define WIN32_LEAN_AND_MEAN
 #define WIN32_EXTRA_LEAN
 
-#include "../../framework/framework_intro_config.h"
-
 #ifndef SYNC_PLAYER
 #include "../../../framework/rocket/sync/device.h"
 #else

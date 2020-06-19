@@ -4,8 +4,7 @@
 #include <math.h>
 #include "rocketControl.h"
 #include "../framework/utils8k.h"
-
-#include "framework_intro_config.h"
+#include "global.h"
 
 #ifdef ENABLE_ROCKET
 #ifdef SYNC_PLAYER
@@ -110,8 +109,8 @@ void UpdateRocket()
 			lastUpdateRow = row;
 		}
 #endif
-#endif
-	}
+}
+#endif	
 }
 
 #ifdef SYNC_PLAYER

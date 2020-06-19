@@ -4,7 +4,6 @@
 #include <windows.h>
 #include <math.h>
 
-#include "../framework_intro_config.h"
 #include "utils8k.h"
 #include "gl/gl8k.h"
 

@@ -5,8 +5,6 @@
 #ifndef SYNC_H
 #define SYNC_H
 
-#include "framework_intro_config.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif

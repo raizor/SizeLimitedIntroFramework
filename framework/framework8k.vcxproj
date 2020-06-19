@@ -251,6 +251,8 @@
   <ItemGroup>
     <ClInclude Include="framework\dialog\fwzSetup.h" />
     <ClInclude Include="framework\dialog\resource.h" />
+    <ClInclude Include="framework\zassert.h" />
+    <ClInclude Include="global.h" />
     <ClInclude Include="rocket\rocketControl.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -260,7 +262,6 @@
     <ClInclude Include="rocket\sync\sync.h" />
     <ClInclude Include="rocket\sync\track.h" />
     <ClCompile Include="framework\dialog\fwzSetup.cpp" />
-    <ClCompile Include="framework_intro_config.cpp" />
     <ClInclude Include="framework\gl\shader.h" />
     <ClInclude Include="framework\assert.h" />
     <ClInclude Include="framework\debug\audio.h">
@@ -283,9 +284,9 @@
     <ClInclude Include="framework\utils8k.h" />
     <ClInclude Include="framework\math\matrix.h" />
     <ClInclude Include="framework\math\vector.h" />
-    <ClInclude Include="framework_intro_config.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="global.cpp" />
     <ClCompile Include="rocket\rocketControl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>

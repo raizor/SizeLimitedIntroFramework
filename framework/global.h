@@ -4,13 +4,12 @@
 #include "framework/gl/gl8k.h"
 #include "framework/math/vector.h"
 #include "framework/math/matrix.h"
-#include "zassert.h"
+#include "framework/zassert.h"
+#include "framework/dialog/fwzSetup.h"
 
 #define ENABLE_PP 1
 
 #define M_PI 3.141926
-
-#define INTRO_TITLE "Eventide Mini Framework v0.1"
 
 #define ENABLE_ROCKET
 
@@ -25,8 +24,6 @@
 
 #define CLINKSTER_EVENTS
 #define VBO_INDEX_BUFFER
-
-// utils toggles
 
 #define ENABLE_ZSTREQL
 
@@ -54,6 +51,8 @@
 
 #define RES_X  global::GetState()->resX
 #define RES_Y  global::GetState()->resY
+#define RES_X_INT  global::GetState()->intResX()
+#define RES_Y_INT  global::GetState()->intResY()
 #define DRAW_X  global::GetState()->drawX
 #define DRAW_Y  global::GetState()->drawY
 #define BAR_SIZE  global::GetState()->barSize
@@ -61,6 +60,11 @@
 
 #define FBO global::GetState()->fbo
 #define FBO_CULLING global::GetState()->fboCulling
+#define FBO_RENDERING global::GetState()->fboRendering
+
+#define RES_SETTINGS global::GetState()->screenSettings
+
+#define INTRO_TITLE global::GetState()->introTitle
 
 struct ZPointGridVertex
 {
@@ -74,6 +78,7 @@ typedef unsigned int ZPointGridVertexIndex;
 class state
 {
 public:
+	fwzSettings screenSettings;
 	float normalMatrix[9];
 	ZVector eye, look, cube, objectPos;
 	ZFbo  *fbo, *fboCulling, *fboRender;
@@ -84,12 +89,13 @@ public:
 	ZMatrix matrixModelViewInverse;
 	ZMatrix matrixNormal;
 
-	int resX;
-	int resY;
+	float resX;
+	float resY;
 	int drawX;
 	int drawY;
 	int barSize;
 	float ar;
+	char* introTitle;
 
 	// todo: zero init these!
 	float objectMixVal;
@@ -97,6 +103,7 @@ public:
 	double rocketRow;
 	float lightPos1[4];
 	float objectMix1;
+	int randomSeed;
 	state();
 };
 
@@ -104,6 +111,7 @@ class global
 {
 public:
 	static state* GetState();
+	static void InitializeFramework(float viewportWidth, float viewportHeight, int randSeed);
 
 private:
 	static state* _state;

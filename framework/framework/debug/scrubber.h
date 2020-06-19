@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Windows.h>
-#include "framework_intro_config.h"
 
 #ifdef ENABLE_SCRUBBER
 

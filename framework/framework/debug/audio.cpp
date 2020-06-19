@@ -5,7 +5,6 @@
 #include "bass.h"
 #include "rocket/rocketControl.h"
 #include "rocket/sync/device.h"
-#include "framework_intro_config.h"
 
 /*
 DEBUG ONLY!
@@ -66,7 +65,7 @@ void openAudioFileStream()
 	char path[MAX_PATH];
 	GetModuleFileName(hModule, path, MAX_PATH);
 	PathRemoveFileSpecA(path);
-	sprintf(path, "%s\\%s", path, "music.wav");
+	sprintf(path, "%s\\%s", path, "music.dat");
 
 	// start music
 	if (BASS_Init(-1, 44100,0,0,nullptr))

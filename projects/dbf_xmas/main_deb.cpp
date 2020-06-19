@@ -26,6 +26,8 @@
 
 #include <direct.h>
 #include <direct3d.h>
+
+#include "global.h"
 #define GetCurrentDir _getcwd
 
 Scrubber* scrubber = NULL;
@@ -221,10 +223,8 @@ static int window_init(fwzSettings* setup)
 	setup->scrBPP = 32;
 	setup->nVsync = 1;
 	setup->nMultisample = 0;
-	
-	USE_RES_SELECTOR = INTRO_DEBUG_USE_SETUP_DIALOG;
 		
-	if (USE_RES_SELECTOR){
+	if (INTRO_DEBUG_USE_SETUP_DIALOG){
 		
 		if (!OpenSetupDialog(setup)){
 			ExitProcess(0);
@@ -280,7 +280,7 @@ static int window_init(fwzSettings* setup)
     rec.bottom = setup->scrHeight;
     AdjustWindowRect( &rec, dwStyle, 0 );
 
-    setup->hWnd = CreateWindowEx( dwExStyle, wc.lpszClassName, introTitle, dwStyle,
+    setup->hWnd = CreateWindowEx( dwExStyle, wc.lpszClassName, INTRO_TITLE, dwStyle,
                                (GetSystemMetrics(SM_CXSCREEN)-rec.right+rec.left)>>1,
                                (GetSystemMetrics(SM_CYSCREEN)-rec.bottom+rec.top)>>1,
                                rec.right-rec.left, rec.bottom-rec.top, 0, 0, setup->hInstance, 0 );
@@ -437,7 +437,6 @@ int WINAPI WinMain( HINSTANCE instance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	// init intro
 	intro_init();
-
 
 #ifndef MUTE_AUDIO
 	// start audio

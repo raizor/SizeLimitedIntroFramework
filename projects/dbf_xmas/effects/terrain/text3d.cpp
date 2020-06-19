@@ -21,6 +21,7 @@
 #include <stdio.h>
 #endif
 
+#include "global.h"
 #include "intro.h"
 
 #include "framework/utils8k.h"

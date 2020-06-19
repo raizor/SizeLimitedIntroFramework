@@ -16,5 +16,16 @@ state* global::GetState()
 	if (!_state)
 		_state = new state();
 	return _state;
+}
 
+void global::InitializeFramework(float viewportWidth, float viewportHeight, int randSeed)
+{
+	/*
+	RES_X = viewportWidth;
+	RES_Y = viewportHeight;
+	*/
+#ifdef ENABLE_RANDOM
+	_state.randomSeed = new int();
+	*_state.randomSeed = randSeed;
+#endif
 }

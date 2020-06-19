@@ -314,8 +314,8 @@ terrain::terrain(void)
 
 	mvMat = new ZMatrix();
 
-	fboPicker = new ZFbo(ZFboDesc(RES_X, RES_Y, 0, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 1, false, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D, GL_NEAREST, GL_NEAREST));
-	fboTexture = new ZFbo(ZFboDesc(RES_X, RES_Y, 0, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 1, false, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D, GL_NEAREST, GL_NEAREST));
+	fboPicker = new ZFbo(ZFboDesc((int)RES_X, (int)RES_Y, 0, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 1, false, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D, GL_NEAREST, GL_NEAREST));
+	fboTexture = new ZFbo(ZFboDesc((int)RES_X, (int)RES_Y, 0, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 1, false, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D, GL_NEAREST, GL_NEAREST));
 
 	parts = new particles();
 
@@ -604,13 +604,13 @@ void drawFluff()
 
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-	glOrtho( 0, RES_X , RES_Y , 0, 0, 1 );             // Select Ortho Mode (ie.640x480)
+	glOrtho( 0, (int)RES_X , (int)RES_Y , 0, 0, 1 );             // Select Ortho Mode (ie.640x480)
 	glBegin(GL_LINES);
 		glVertex2i(0, BAR_SIZE-2);
-		glVertex2i(RES_X, BAR_SIZE-2);
+		glVertex2i((int)RES_X, BAR_SIZE-2);
 
-		glVertex2i(0, RES_Y-BAR_SIZE+1);
-		glVertex2i(RES_X, RES_Y-BAR_SIZE+1);
+		glVertex2i(0, (int)RES_Y-BAR_SIZE+1);
+		glVertex2i((int)RES_X, ((int)RES_Y)-BAR_SIZE+1);
 	glEnd();
 
 	glPopMatrix();

@@ -339,8 +339,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="global.h" />
-    <ClInclude Include="zassert.h" />
+    <ClInclude Include="config.h" />
     <ClInclude Include="direct3d.h" />
     <ClInclude Include="effects\terrain\terrain.h" />
     <ClInclude Include="intro.h" />
@@ -356,7 +355,6 @@
   <ItemGroup>
     <ClCompile Include="direct3d.cpp" />
     <ClCompile Include="effects\terrain\terrain.cpp" />
-    <ClCompile Include="global.cpp" />
     <ClCompile Include="intro.cpp" />
     <ClCompile Include="main_deb.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

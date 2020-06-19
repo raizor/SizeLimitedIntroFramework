@@ -29,13 +29,10 @@
 #endif
 
 #include "framework/utils8k.h"
-#include "framework_intro_config.h"
 #include "global.h"
 
 GLuint vertexBufferPointGridID = 0;
 GLuint vertexBufferQuadID = 0;
-
-ZFbo  *fbo, *fboCulling, *fboRender;
 
 terrain* effectTerrain;
 
@@ -57,12 +54,13 @@ shader* shaderBlit;
 // Initialize intro - set stuff up here
 //----------------------------------------
 void intro_init( void )
-{
-	introTitle = "XMAS";
-	
-	#define GRID_SIZE 256
+{	
+	AR = 1.75f;
 
-	ASPECT_RATIO = 1.75f;
+	state* ste = global::GetState();
+	
+	RES_X = 1280;
+	RES_Y = 720;
 
 	DRAW_X = (int)RES_X;
 	DRAW_Y = (int)(RES_Y / AR);
@@ -70,7 +68,7 @@ void intro_init( void )
 
 	glViewport(0, 0, (int)RES_X, (int)RES_Y);
 	
-	InitializeFramework((float)RES_X, (float)RES_Y, 0);
+	global::InitializeFramework(RES_X, RES_Y, 0);
 	InitGlExtensions();
 
 #ifdef DEBUG
@@ -126,8 +124,8 @@ void intro_init( void )
 	glBufferData(GL_ARRAY_BUFFER, GRID_SIZE*GRID_SIZE*sizeof(ZPointGridVertex), vertices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	fbo = new ZFbo(ZFboDesc((int)(RES_X*1.0), (int)(RES_Y*1.0), 0, GL_RGBA, GL_RGBA32F_ARB, GL_FLOAT, 1, true, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D));
-	fboCulling = new ZFbo(ZFboDesc((int)(RES_X*1.0), (int)(RES_Y*1.0), 0, GL_RGBA, GL_RGBA32F_ARB, GL_FLOAT, 1, true, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D));
+	FBO = new ZFbo(ZFboDesc((int)(RES_X*1.0), (int)(RES_Y*1.0), 0, GL_RGBA, GL_RGBA32F_ARB, GL_FLOAT, 1, true, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D));
+	FBO_CULLING = new ZFbo(ZFboDesc((int)(RES_X*1.0), (int)(RES_Y*1.0), 0, GL_RGBA, GL_RGBA32F_ARB, GL_FLOAT, 1, true, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D));
 
 	effectTerrain = new terrain();
 }
@@ -202,7 +200,7 @@ void DrawFbo(float time)
 	//glOrtho( 0, XRES , YRES , 0, 0, 1 );             // Select Ortho Mode (ie.640x480)
 	glColor4f(1,1,1,1);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, fbo->colorBufferID[0]);
+	glBindTexture(GL_TEXTURE_2D, FBO->colorBufferID[0]);
 	//glBindTexture(GL_TEXTURE_2D, fbo->depthBufferID);
 	
 	// draw fbo to screen

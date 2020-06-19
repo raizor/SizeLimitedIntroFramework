@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../framework_intro_config.h"
-
 #ifndef SYNC_PLAYER
 #include "sync\sync.h"
 #endif

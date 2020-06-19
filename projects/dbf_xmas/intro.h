@@ -15,7 +15,7 @@ float sfrand( int *seed );
 
 float floor4k(float x);
 
-#define INTRO_DEBUG_USE_SETUP_DIALOG  true
+#define INTRO_DEBUG_USE_SETUP_DIALOG  false
 #define INTRO_RELEASE_USE_SETUP_DIALOG true
 
 #endif
