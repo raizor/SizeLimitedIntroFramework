@@ -10,9 +10,9 @@ class shader
 {
 public:
 	char definesString[5000];
-	char *strVs, *strFs, *strGs;
+	const char *strVs, *strFs, *strGs;
 	GLint shaderProg;
-	shader( char* vs,  char* gs,  char* fs,  char* defines, char* shaderName = NULL);
+	shader( const char* vs, const char* gs, const char* fs, const char* defines, const char* shaderName);
 	void SetActive(bool active);
 	#ifdef DEBUG
 		bool reload();

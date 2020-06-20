@@ -31,6 +31,13 @@
 #include "framework/utils8k.h"
 #include "global.h"
 
+ZVector eye;
+ZVector look;
+ZVector cube;
+ZVector objectPos;
+float introTimeSecs = 0;
+float introLength = 0;
+
 GLuint vertexBufferPointGridID = 0;
 GLuint vertexBufferQuadID = 0;
 
@@ -39,8 +46,6 @@ terrain* effectTerrain;
 double rocketRow;
 
 //---------------------------------------------------------------------
-
-#define fzf  1000.0f
 
 static const float projectionmatrix[16] = {
     1.0f, 0.00f,  0.0f,                    0.0f,
@@ -57,7 +62,7 @@ void intro_init( void )
 {	
 	AR = 1.75f;
 
-	state* ste = global::GetState();
+	IntroState* ste = global::GetState();
 	
 	RES_X = 1280;
 	RES_Y = 720;
@@ -76,13 +81,15 @@ void intro_init( void )
 		"shaders\\include\\tv.vs.glsl",
 		NULL,
 		"shaders\\include\\tv.fs.glsl",
-		""
+		"",
+		"TV"
 		);
 #else
 	shaderBlit = new shader(
 		(char*)tv_vs_glsl,
 		NULL,
 		(char*)tv_fs_glsl,
+		"",
 		""
 		);
 #endif

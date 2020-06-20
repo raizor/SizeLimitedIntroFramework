@@ -4,6 +4,14 @@
 
 #ifndef _INTRO_H_
 #define _INTRO_H_
+#include "framework/math/vector.h"
+
+extern ZVector eye;
+extern ZVector look;
+extern ZVector cube;
+extern ZVector objectPos;
+extern float introTimeSecs;
+extern float introLength;
 
 void intro_init( void );
 void intro_do( float time );

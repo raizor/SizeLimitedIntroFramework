@@ -190,14 +190,14 @@ terrain::terrain(void)
 		"shaders\\include\\terrainTest.vert",
 		NULL,
 		"shaders\\include\\terrainTest.frag",
-		""
-		);
+		"", "TER_LOGO");
 	
 	shaderTerrainLogo = new shader(
 		"shaders\\include\\terrainTest.vert",
 		NULL,
 		"shaders\\include\\terrainTest.frag",
-		"#define LOGO\n"
+		"#define LOGO\n",
+		"TER_PLAIN"
 		);
 		
 	
@@ -205,8 +205,8 @@ terrain::terrain(void)
 		"shaders\\include\\terrainTest.vert",
 		NULL,
 		"shaders\\include\\terrainTest.frag",
-		"#define SNOWMAN\n"
-		);
+		"#define SNOWMAN\n",
+		"TER_SNOWMAN");
 		
 #else
 	
@@ -214,6 +214,7 @@ terrain::terrain(void)
 		(char*)terrainTest_vert,
 		NULL,
 		(char*)terrainTest_frag,
+		"",
 		""
 		);
 
@@ -221,14 +222,16 @@ terrain::terrain(void)
 		(char*)terrainTest_vert,
 		NULL,
 		(char*)terrainTest_frag,
-		"#define LOGO\n"
+		"#define LOGO\n",
+		""
 		);
 
 	shaderTerrainSnowman = new shader(
 		(char*)terrainTest_vert,
 		NULL,
 		(char*)terrainTest_frag,
-		"#define SNOWMAN\n"
+		"#define SNOWMAN\n",
+		""
 		);
 #endif
 

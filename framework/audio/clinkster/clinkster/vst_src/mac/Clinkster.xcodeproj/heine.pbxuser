@@ -1,0 +1,369 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeTarget = 8D01CCC60486CAD60068D4B7 /* LnsFMsynth3 */;
+		addToTargets = (
+			8D01CCC60486CAD60068D4B7 /* LnsFMsynth3 */,
+		);
+		codeSenseManager = 61165E0912F43D1300B44D6E /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXBookmarksDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXBookmarksDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					200,
+					200,
+					803,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXBookmarksDataSource_LocationID,
+					PBXBookmarksDataSource_NameID,
+					PBXBookmarksDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					881,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					993,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFindDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFindDataSource_LocationID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					200,
+					1007,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFindDataSource_MessageID,
+					PBXFindDataSource_LocationID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXSymbolsDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXSymbolsDataSource_SymbolNameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					16,
+					200,
+					50,
+					933,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXSymbolsDataSource_SymbolTypeIconID,
+					PBXSymbolsDataSource_SymbolNameID,
+					PBXSymbolsDataSource_SymbolTypeID,
+					PBXSymbolsDataSource_ReferenceNameID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					953,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 317999102;
+			PBXWorkspaceStateSaveDate = 317999102;
+		};
+		perUserProjectItems = {
+			61165EF412F446A700B44D6E /* PlistBookmark */ = 61165EF412F446A700B44D6E /* PlistBookmark */;
+			61165EFA12F446A700B44D6E /* PBXTextBookmark */ = 61165EFA12F446A700B44D6E /* PBXTextBookmark */;
+			61165EFB12F446A700B44D6E /* PBXTextBookmark */ = 61165EFB12F446A700B44D6E /* PBXTextBookmark */;
+			61165EFC12F446A700B44D6E /* PBXTextBookmark */ = 61165EFC12F446A700B44D6E /* PBXTextBookmark */;
+			61165EFE12F446A700B44D6E /* PBXTextBookmark */ = 61165EFE12F446A700B44D6E /* PBXTextBookmark */;
+			61165F0212F446A700B44D6E /* PBXTextBookmark */ = 61165F0212F446A700B44D6E /* PBXTextBookmark */;
+			61165F0312F446A700B44D6E /* PBXTextBookmark */ = 61165F0312F446A700B44D6E /* PBXTextBookmark */;
+			61165F0412F446A700B44D6E /* PlistBookmark */ = 61165F0412F446A700B44D6E /* PlistBookmark */;
+			61165F1412F4478500B44D6E /* PBXTextBookmark */ = 61165F1412F4478500B44D6E /* PBXTextBookmark */;
+			61165F1512F4478500B44D6E /* PBXTextBookmark */ = 61165F1512F4478500B44D6E /* PBXTextBookmark */;
+			61165F1812F4478500B44D6E /* PBXTextBookmark */ = 61165F1812F4478500B44D6E /* PBXTextBookmark */;
+			614C27D012F4480100258D22 /* PBXTextBookmark */ = 614C27D012F4480100258D22 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 61165E0812F43D1300B44D6E /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	24A483900926E8F400DC794C /* Info.plist */ = {
+		uiCtxt = {
+			sepNavWindowFrame = "{{15, 57}, {750, 821}}";
+		};
+	};
+	24A483910926E8F400DC794C /* PkgInfo */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 688}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 8}";
+		};
+	};
+	24D8290509A91ECA0093AEF8 /* xcode_vst_prefix.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 688}}";
+			sepNavSelRange = "{280, 0}";
+			sepNavVisRange = "{0, 401}";
+		};
+	};
+	61165E0812F43D1300B44D6E /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	61165E0912F43D1300B44D6E /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	61165E4912F441BA00B44D6E /* vstxsynth.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1379, 2964}}";
+			sepNavSelRange = "{3196, 0}";
+			sepNavVisRange = "{2948, 856}";
+		};
+	};
+	61165E4A12F441BA00B44D6E /* paramdef.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 688}}";
+			sepNavSelRange = "{78, 0}";
+			sepNavVisRange = "{0, 2574}";
+			sepNavWindowFrame = "{{15, 57}, {750, 821}}";
+		};
+	};
+	61165E4B12F441BA00B44D6E /* actualsynth.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 2743}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1548}";
+		};
+	};
+	61165E4C12F441BA00B44D6E /* vstxsynth.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1055, 5330}}";
+			sepNavSelRange = "{4911, 0}";
+			sepNavVisRange = "{4592, 513}";
+			sepNavWindowFrame = "{{15, 57}, {750, 821}}";
+		};
+	};
+	61165E4D12F441BA00B44D6E /* vstxsynthproc.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 3757}}";
+			sepNavSelRange = "{811, 0}";
+			sepNavVisRange = "{0, 1915}";
+		};
+	};
+	61165E5712F441BA00B44D6E /* vstplugmain.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 897}}";
+			sepNavSelRange = "{915, 0}";
+			sepNavVisRange = "{0, 1974}";
+		};
+	};
+	61165E5812F441BA00B44D6E /* gmnames.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 2652}}";
+			sepNavSelRange = "{659, 0}";
+			sepNavVisRange = "{0, 871}";
+		};
+	};
+	61165EF412F446A700B44D6E /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 61165EF512F446A700B44D6E /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/heine/Loonies/LnsFMSynth3/mac/Info.plist;
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	61165EF512F446A700B44D6E /* Info.plist */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = text.plist.xml;
+		name = Info.plist;
+		path = /Users/heine/Loonies/LnsFMSynth3/mac/Info.plist;
+		sourceTree = "<absolute>";
+	};
+	61165EF912F446A700B44D6E /* vstxsynth.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = vstxsynth.h;
+		path = /Users/heine/Loonies/LnsFMSynth3/vstxsynth.h;
+		sourceTree = "<absolute>";
+	};
+	61165EFA12F446A700B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 61165E4A12F441BA00B44D6E /* paramdef.h */;
+		name = "paramdef.h: 3";
+		rLen = 0;
+		rLoc = 78;
+		rType = 0;
+		vrLen = 2574;
+		vrLoc = 0;
+	};
+	61165EFB12F446A700B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 61165E4B12F441BA00B44D6E /* actualsynth.cpp */;
+		name = "actualsynth.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1548;
+		vrLoc = 0;
+	};
+	61165EFC12F446A700B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 61165EFD12F446A700B44D6E /* vstxsynth.cpp */;
+		name = "vstxsynth.cpp: 173";
+		rLen = 0;
+		rLoc = 4913;
+		rType = 0;
+		vrLen = 1758;
+		vrLoc = 4160;
+	};
+	61165EFD12F446A700B44D6E /* vstxsynth.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = vstxsynth.cpp;
+		path = /Users/heine/Loonies/LnsFMSynth3/vstxsynth.cpp;
+		sourceTree = "<absolute>";
+	};
+	61165EFE12F446A700B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 61165E4D12F441BA00B44D6E /* vstxsynthproc.cpp */;
+		name = "vstxsynthproc.cpp: 17";
+		rLen = 0;
+		rLoc = 811;
+		rType = 0;
+		vrLen = 1915;
+		vrLoc = 0;
+	};
+	61165F0212F446A700B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24A483910926E8F400DC794C /* PkgInfo */;
+		name = "PkgInfo: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 8;
+		vrLoc = 0;
+	};
+	61165F0312F446A700B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24D8290509A91ECA0093AEF8 /* xcode_vst_prefix.h */;
+		name = "xcode_vst_prefix.h: 19";
+		rLen = 0;
+		rLoc = 280;
+		rType = 0;
+		vrLen = 401;
+		vrLoc = 0;
+	};
+	61165F0412F446A700B44D6E /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 61165F0512F446A700B44D6E /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/heine/Loonies/LnsFMsynth3/build/Debug/LnsFMsynth3.vst/Contents/Info.plist;
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	61165F0512F446A700B44D6E /* Info.plist */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = text.plist.xml;
+		name = Info.plist;
+		path = /Users/heine/Loonies/LnsFMsynth3/build/Debug/LnsFMsynth3.vst/Contents/Info.plist;
+		sourceTree = "<absolute>";
+	};
+	61165F1412F4478500B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 61165E5712F441BA00B44D6E /* vstplugmain.cpp */;
+		name = "vstplugmain.cpp: 23";
+		rLen = 0;
+		rLoc = 915;
+		rType = 0;
+		vrLen = 1974;
+		vrLoc = 0;
+	};
+	61165F1512F4478500B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 61165EF912F446A700B44D6E /* vstxsynth.h */;
+		name = "vstxsynth.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1626;
+		vrLoc = 0;
+	};
+	61165F1812F4478500B44D6E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 61165E5812F441BA00B44D6E /* gmnames.h */;
+		name = "gmnames.h: 20";
+		rLen = 0;
+		rLoc = 659;
+		rType = 0;
+		vrLen = 858;
+		vrLoc = 0;
+	};
+	614C27D012F4480100258D22 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 61165E5812F441BA00B44D6E /* gmnames.h */;
+		name = "gmnames.h: 20";
+		rLen = 0;
+		rLoc = 659;
+		rType = 0;
+		vrLen = 871;
+		vrLoc = 0;
+	};
+	8D01CCC60486CAD60068D4B7 /* LnsFMsynth3 */ = {
+		activeExec = 0;
+	};
+}

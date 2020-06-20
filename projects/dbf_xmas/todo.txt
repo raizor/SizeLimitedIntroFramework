@@ -1,2 +1,4 @@
-1. fix time when paused.
-2. plug in random texture
+* fix time when paused.
+* plug in random texture
+* move audio/data/wave file rendering to framework
+

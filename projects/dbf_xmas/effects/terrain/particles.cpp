@@ -37,13 +37,14 @@ particles::particles(void)
 		"shaders\\include\\particles.vert",
 		"shaders\\include\\particles.geom",
 		"shaders\\include\\particles.frag",
-		"");
+		"", "PARTICLES");
 
 #else
 	shaderParticles = new shader(
 		(char*)particles_vert,
 		(char*)particles_geom,
 		(char*)particles_frag,
+		"",
 		""
 		);
 #endif

@@ -60,17 +60,20 @@ text3d::text3d(void)
 	int fontHeight = 18;
 
 #ifdef DEBUG
-	shaderText = new shader("shaders\\include\\txt.vert",
+	shaderText = new shader(
+		"shaders\\include\\txt.vert",
 		NULL,
 		"shaders\\include\\txt.frag",
-		""
-		);
+		"",
+		"TEXT"
+	);
 #else
 	shaderText = new shader(
-		(char*)txt_vert,
+		txt_vert,
 		NULL,
-		(char*)txt_frag,
-		""
+		txt_frag,
+		"",
+		"TEXT"
 		);
 #endif
 

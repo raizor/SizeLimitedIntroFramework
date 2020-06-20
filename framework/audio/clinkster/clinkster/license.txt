@@ -1,0 +1,34 @@
+
+CLINKSTER - a software synthesizer for 4k intros by Blueberry / Loonies
+
+
+With the exceptions noted below, all content of this package is Copyright
+2008-2013 Aske Simon Christensen. It may be freely used, distributed,
+modified, redistributed, studied and laughed at by any person or entity.
+
+ALL CONTENT OF THE PACKAGE COMES WITH NO WARRANTY OF ANY KIND. THE AUTHORS OF
+THE CONTENT CAN NOT BE HELD RESPONSIBLE FOR ANY CONSEQUENCES OF THE USE OF THE
+CONTENT, EVEN IF YOUR CAPS-LOCK KEY IS STUCK.
+
+If you distribute music made using the synth, on its own or as part of a
+composite work, proper attribution is highly appreciated, though not strictly
+required.
+
+
+Exceptions:
+
+- The music examples in examples/songs are Copyright of their respective
+  authors. They are distributable under the Creative Commons Attribution
+  license.
+
+- The VST is based on the VST SDK, located in vst_src/source/vst2.x, which is
+  Copyright Steinberg Media Technologies Gmbh.
+
+- Crinkler, located in easy_exe/tools/crinkler14, is covered by its own
+  licensing terms, which are included.
+
+- The .lib and .dll files in easy_exe/tools are Copyright Microsoft
+  Corporation.
+
+- Nasm, located in easy_exe/tools, is distributable under the GNU Lesser
+  General Public License.

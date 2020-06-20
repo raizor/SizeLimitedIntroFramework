@@ -17,7 +17,6 @@
 
 #ifdef DEBUG
 #define ENABLE_SCRUBBER
-#define ENABLE_MUSIC	
 #else
 #define SYNC_PLAYER
 #endif
@@ -75,7 +74,7 @@ struct ZPointGridVertex
 
 typedef unsigned int ZPointGridVertexIndex;
 
-class state
+class IntroState
 {
 public:
 	fwzSettings screenSettings;
@@ -104,15 +103,15 @@ public:
 	float lightPos1[4];
 	float objectMix1;
 	int randomSeed;
-	state();
+	IntroState();
 };
 
 class global
 {
 public:
-	static state* GetState();
+	static IntroState* GetState();
 	static void InitializeFramework(float viewportWidth, float viewportHeight, int randSeed);
 
 private:
-	static state* _state;
+	static IntroState* _state;
 };

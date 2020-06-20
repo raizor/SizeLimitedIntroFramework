@@ -10,7 +10,7 @@ void MsgBox(const char* title, const char* msg)
 	MessageBox(0, msg, title, MB_OK | MB_TOPMOST);
 }
 
-void compileShader(GLuint id, char* shaderName = NULL)
+void compileShader(GLuint id, const char* shaderName = NULL)
 {
 	glCompileShader(id);
 #ifdef DEBUG
@@ -31,7 +31,7 @@ void compileShader(GLuint id, char* shaderName = NULL)
 #endif
 }
 
-shader::shader( char* vs,  char* gs,  char* fs,  char* defines, char* shaderName)
+shader::shader(const char* vs, const char* gs, const char* fs, const char* defines, const char* shaderName)
 {
 
 #ifdef DEBUG

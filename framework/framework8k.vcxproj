@@ -73,8 +73,8 @@
     <IntDir>build\obj\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>$(SolutionDir)framework\clinkster\player;$(SolutionDir)framework\rocket;$(SolutionDir)framework\src;../;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)framework\clinkster\player;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)framework\audio;$(SolutionDir)framework\rocket;$(SolutionDir)framework\src;$(SolutionDir)framework;../;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)framework/libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -247,10 +247,18 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <OutputFile>.\bin/Release/i4k_OGL_vc2008.bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)framework\minifier\shader_minifier.exe -o framework/gl/shaders/shader_code_framework.h --input-dir $(ProjectDir)framework/gl/shaders/include --preserve-externals --const --no-renaming --no-sequence</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="audio\clinkster\AudioHelper_Clinkster.h" />
     <ClInclude Include="framework\dialog\fwzSetup.h" />
     <ClInclude Include="framework\dialog\resource.h" />
+    <ClInclude Include="framework\effects\pp\fxaa\fxaa.h" />
+    <ClInclude Include="framework\effects\pp\ssao\ssao.h" />
+    <ClInclude Include="framework\effects\pp\tv\tv.h" />
+    <ClInclude Include="framework\gl\shaders\shader_code_framework.h" />
     <ClInclude Include="framework\zassert.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="rocket\rocketControl.h">
@@ -261,6 +269,7 @@
     <ClInclude Include="rocket\sync\device.h" />
     <ClInclude Include="rocket\sync\sync.h" />
     <ClInclude Include="rocket\sync\track.h" />
+    <ClCompile Include="audio\clinkster\AudioHelper_Clinkster.cpp" />
     <ClCompile Include="framework\dialog\fwzSetup.cpp" />
     <ClInclude Include="framework\gl\shader.h" />
     <ClInclude Include="framework\assert.h" />
@@ -286,6 +295,9 @@
     <ClInclude Include="framework\math\vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="framework\effects\pp\fxaa\fxaa.cpp" />
+    <ClCompile Include="framework\effects\pp\ssao\ssao.cpp" />
+    <ClCompile Include="framework\effects\pp\tv\tv.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="rocket\rocketControl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">false</ExcludedFromBuild>
@@ -322,24 +334,28 @@
     <ClCompile Include="framework\math\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="audio\clinkster\player\ftol.asm">
+    <CustomBuild Include="audio\clinkster\clinkster\player\ftol.asm">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)framework\yasm\vsyasm.exe -f win32 -g cv8 $(SolutionDir)framework\audio\clinkster\player\ftol.asm -o $(SolutionDir)framework\audio\clinkster\player\ftol.o</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)framework\yasm\vsyasm.exe -f win32 -g cv8 $(SolutionDir)framework\audio\clinkster\clinkster\player\ftol.asm -o $(SolutionDir)framework\audio\clinkster\clinkster\player\ftol.o</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">$(SolutionDir)framework\yasm\vsyasm.exe -f win32 -g cv8 $(SolutionDir)framework\clinkster\player\ftol.asm -o $(SolutionDir)framework\clinkster\player\ftol.o</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)framework\yasm\vsyasm.exe -f win32 -g cv8 $(SolutionDir)framework\audio\clinkster\player\ftol.asm -o $(SolutionDir)framework\audio\clinkster\player\ftol.o</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)framework\yasm\vsyasm.exe -f win32 -g cv8 $(SolutionDir)framework\audio\clinkster\clinkster\player\ftol.asm -o $(SolutionDir)framework\audio\clinkster\clinkster\player\ftol.o</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">$(SolutionDir)framework\yasm\vsyasm.exe -f win32 -g cv8 $(SolutionDir)framework\clinkster\player\ftol.asm -o $(SolutionDir)framework\clinkster\player\ftol.o</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)framework\clinkster\player\ftol.o</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">$(SolutionDir)framework\clinkster\player\ftol.o</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="audio\clinkster\player\ftol.obj" />
+    <Object Include="audio\clinkster\clinkster\player\ftol.obj" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="framework\dialog\FWZ.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="framework\dialog\FWZ.APS" />
+    <None Include="framework\gl\shaders\include\ssao.fs.glsl" />
+    <None Include="framework\gl\shaders\include\ssao.vs.glsl" />
+    <None Include="framework\gl\shaders\include\tv.fs.glsl" />
+    <None Include="framework\gl\shaders\include\tv.vs.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

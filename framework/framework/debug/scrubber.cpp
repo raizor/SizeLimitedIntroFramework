@@ -254,7 +254,7 @@ void Scrubber::Draw(float fNormalizedScrubberPos)
 	//glColor4f(1.f, 1.f, 1.f, 1.f);
 	//DrawTime(scrubberPos, m_fTop + kBorder + kScrubberPadding, scrubberPos + kScrubberWidth, m_fBottom - kBorder - kScrubberPadding);
 
-	// Restore state
+	// Restore IntroState
 	glPopAttrib();
 
 	glMatrixMode(GL_MODELVIEW);

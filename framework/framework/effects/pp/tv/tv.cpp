@@ -1,5 +1,8 @@
 #include "tv.h"
+
+#include "global.h"
 #include "framework/utils8k.h"
+#include "projects/dbf_xmas/shader_code_intro.h"
 
 #pragma warning(disable: 4102)
 
@@ -9,13 +12,16 @@ tv::tv() : effect()
 	prog = new shader(
 		"shaders\\include\\tv.vs.glsl",
 		NULL,
-		"shaders\\include\\tv.fs.glsl"
-		);
+		"shaders\\include\\tv.fs.glsl",
+		"",
+		"TV");
 #else
 	prog = new shader(
-		&tv_vs_glsl,
-		&tv_gs_glsl,
-		&tv_fs_glsl,
+		tv_vs_glsl,
+		"",
+		tv_fs_glsl,
+		"",
+		"TV"
 		);
 #endif
 }
@@ -62,13 +68,13 @@ void tv::Render(GLuint colorBufferTextureId, float time, float flashAmount, floa
 		glVertex2f(0, 0);
 
 		glTexCoord2f(0, 0);
-		glVertex2f(0, YRES);
+		glVertex2f(0, RES_Y);
 
 		glTexCoord2f(1, 0);
-		glVertex2f(XRES, YRES);
+		glVertex2f(RES_X, RES_Y);
 
 		glTexCoord2f(1, 1);
-		glVertex2f(XRES, 0);
+		glVertex2f(RES_X, 0);
 	}		
 	glEnd();
 	

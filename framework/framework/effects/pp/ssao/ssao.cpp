@@ -1,22 +1,29 @@
 #include "ssao.h"
 #include "framework/utils8k.h"
+#include "global.h"
+#include "framework/gl/shaders/shader_code_framework.h"
 
 #pragma warning(disable: 4102)
 
 ssao::ssao() : effect()
 {
 #ifdef DEBUG
-	prog = new shader(
+	prog = new shader
+	(
 		"shaders\\include\\ssao.vs.glsl",
 		NULL,
-		"shaders\\include\\ssao.fs.glsl"
-		);
+		"shaders\\include\\ssao.fs.glsl",
+		"", 
+		"SSAO"
+	);
 #else
 	prog = new shader(
-		&ssao_vs_glsl,
-		&ssao_gs_glsl,
-		&ssao_fs_glsl,
-		);
+		ssao_vs_glsl,
+		"",
+		ssao_fs_glsl,
+		"",
+		"SSAO"
+	);
 #endif
 }
 
@@ -33,10 +40,10 @@ void ssao::Render(GLuint colorBufferTextureId, GLuint depthBufferTextureId, floa
 	glUniform1i(iLoc, 1);
 	
 	iLoc = glGetUniformLocation(prog->shaderProg, "bgl_RenderedTextureWidth");
-	glUniform1f(iLoc, XRES);
+	glUniform1f(iLoc, RES_X);
 
 	iLoc = glGetUniformLocation(prog->shaderProg, "bgl_RenderedTextureHeight");
-	glUniform1f(iLoc, YRES);
+	glUniform1f(iLoc, RES_Y);
 
 	iLoc = glGetUniformLocation(prog->shaderProg, "zNear");
 	glUniform1f(iLoc, zNear);
@@ -56,13 +63,13 @@ void ssao::Render(GLuint colorBufferTextureId, GLuint depthBufferTextureId, floa
 		glVertex2f(0, 0);
 
 		glTexCoord2f(0, 0);
-		glVertex2f(0, YRES);
+		glVertex2f(0, RES_Y);
 
 		glTexCoord2f(1, 0);
-		glVertex2f(XRES, YRES);
+		glVertex2f(RES_X, RES_Y);
 
 		glTexCoord2f(1, 1);
-		glVertex2f(XRES, 0);
+		glVertex2f(RES_X, 0);
 	}		
 	glEnd();
 	

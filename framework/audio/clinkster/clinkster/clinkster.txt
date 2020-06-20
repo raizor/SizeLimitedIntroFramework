@@ -1,0 +1,202 @@
+
+CLINKSTER - a software synthesizer for 4k intros by Blueberry / Loonies
+
+
+INTRODUCTION
+
+Clinkster is a software synthesizer (or synth, for short) designed for use in
+extremely size-restricted executables, such a 4k intros. It has been under
+development since 2008 and used in several 4k intros through the years. For
+some background reading on the ideas behind it and its early history, refer
+to the article from Zine #14 "Development Diary of Luminagia":
+http://zine.bitfellas.org/article.php?zine=14&id=24
+
+
+FEATURES
+
+ - VST instrument for Windows and Mac OS X, with source
+ - Simple interface: create your instruments using just 18 sliders
+ - Multi-layered, delicious, voluminous stereo sound based on phase modulation
+ - Unlimited number of tracks and unlimited polyphony per track
+ - Player source for Windows - integrate with C++ or asm
+ - Fast precalculation of music
+ - Excludes unused features from player code to save space
+ - Easy-exe setup for creating executable music - no coding or additional
+   installation needed
+ - Many example songs and instruments included
+
+
+OVERVIEW
+
+The Clinkster toolchain consists of three parts:
+
+1. A VST instrument to use when composing the music. This can in principle be
+   used with any VSTi host, but the rest of the toolchain is designed to be
+   used with Renoise, so if you want to use your music in an executable, you
+   will need to make your music in Renoise.
+
+2. A conversion script - RenoiseConvert.py - to convert a Renoise song using
+   Clinkster instruments into a .asm file containing the music data in the
+   format needed by the executable player. To run the conversion script, you
+   will need to install Python 2.x (where x >= 5).
+
+3. Player code to include in your intro. The clinkster.asm file assumes the
+   converted music is called music.asm. The clinkster.h and clinkster.inc
+   files contain definitions for using the synth from C/C++ or asm,
+   respectively. Refer to these files for detailed usage information.
+
+
+PARAMETERS
+
+Clinkster is designed to be used with the built-in VST parameter adjustment
+GUI in Renoise.
+
+The numbers in parentheses after the value of each parameter indicates the
+byte value that will be used to represent that parameter value in the
+executable version of the music. Using the same byte values across parameters
+and across instruments generally leads to a more compact representation of the
+music.
+
+The sliders in Renoise have 101 different positions, and for most of the
+parameters, these correspond to successive byte values. The exceptions are:
+- B PitchD, M PitchD, IndexD, Attack, Decay, Release, Gain: One position for
+  every two values.
+- B Pitch and M Pitch: 5 positions for every 12 values (one octave).
+- RandomSeed: 128 values in total.
+
+If you want a value in between two slider-accessible values, click on the
+value to access the internal representation (0% for minimum, 100% for maximum)
+and modify it slightly.
+
+As for the meaning of the individual parameters, experimentation is the key.
+Be sure to test your instrument in many different octaves. To get you started,
+here is a brief description of the parameters:
+
+BaseWave, ModWave: Waveforms for the two oscillators. The ModWave modulates
+    the phase of the BaseWave.
+B Detune, M Detune: Randomly varies the frequencies of the two oscillators
+    across layers and across the left and right channel.
+B Pitch, M Pitch: Pitch the oscillator up or down relative to the played note.
+B PitchD, M PitchD (pitch decay): Decay the pitch towards (or away from) the
+    played note.
+Index: Strength of the phase modulation.
+IndexSpr (index spread): Randomly varies the modulation strength across layers
+    and across the left and right channel.
+IndexD (index decay): Decay the modulation strength towards (or away from)
+    zero.
+Layers: Number of layers of sound to compute, with individual, random
+    variations controlled by the detune and index spread parameters. More
+    layers give a fatter, more chorus-like sound but also increases the
+    computational load of the instrument considerably.
+RandomSeed: Seed used for the random variations across layers and channels.
+    Adjust this until you get a balanced, in-key sound.
+Attack, Decay, Sustain, Release: Control the amplitude envelope of the sound.
+    Setting Sustain to a negative value creates a "double attack" where the
+    amplitude crosses zero during the decay.
+Gain: Amplify the sound after the amplitude envelope and apply soft clipping.
+    Results in distorted or compressed sounds.
+
+Also take a look at the included example instruments and example songs for
+inspiration.
+
+
+USING THE VST
+
+In order to use the music in an executable, there are a couple of guidelines
+you need to follow when creating your music in Renoise.
+
+You can use per-note velocity, but no other in-track effect commands.
+
+You can use any number of tracks and any number of note columns per track.
+
+You can adjust the volume and panning of tracks using the Volume/Panning Track
+DSP, the post-DSP volume/panning, the mixer and the master volume.
+
+You can use the Delay effect (under Track DSPs) with these restrictions:
+- The "L Feedb.", "R Feedb." and "Send" sliders must be at the same position.
+- "Mute Src." must be off.
+- No L/R Output Pan.
+- If you use the Delay effect on multiple tracks, you must use the exact same
+  parameters on each track.
+
+To make it easier to control the volume and panning of a group of tracks, or
+to use the same delay on multiple tracks, you can use a #Send DSP set to "Mute
+Source" to route the sound from the track to a Send track. You can then set
+the desired volume, panning and delay on the Send track. Only the final track
+of a Send chain can use delay.
+
+The VST is designed to run in one instance per instrument and supports
+unlimited polyphony and unlimited reuse of instruments across tracks. Note
+however, that if you play notes using the same instrument in multiple tracks
+at the same time, Renoise will play the notes using a single VST instance and
+output the result in the track in which the last note was triggered. This
+works fine as long as the tracks use the same volume, panning and delay. If
+this is not the case, you will need to use separate copies of the instrument
+for each different track. Otherwise, you will get clicks and generally a
+different result from what you expected.
+
+In the pattern sequence matrix (available to the left of the pattern view),
+you can mute individual tracks at specific positions. This muting is taken
+into account by the converter.
+
+The VST works with any sample rate. To match the sound produced by the player,
+use a sample rate of 44100Hz. If your music is too computationally heavy for
+your CPU to cope with, you can lighten the load by lowering the sample rate
+while composing, though that will of course have a detrimental effect on the
+sound quality.
+
+
+USING THE CONVERTER
+
+The RenoiseConvert.py script in the converter directory (or, equivalently,
+RenoiseConvert.exe in easy_exe/tools) will convert a Renoise song using
+Clinkster into a .asm file to use with the supplied player source.
+
+During conversion, each note column in a track will become a separate track in
+the converted music. If you use more than one instrument inside a single note
+column, that column will be split by the converter into one track per
+instrument. Also, if you have used the delay effect, all tracks using delay
+will be put before the tracks not using delay.
+
+The converter will print a list of the resulting tracks, along with the
+original track / instrument combinations they correspond to.
+
+For each track, it will print a list of tone / length / velocity combinations
+used in that track, in the form NOTE/VELOCITY:LENGTH(NUMBER) or
+NOTE:LENGTH(NUMBER). For instance, C-4/6A:4(32) means that C-4 notes with
+velocity 6A (hex) and length 4 occur 32 times in the track. If the velocity is
+omitted, it is 127 (7F hex - maximum). The number of different combinations
+used in the track has influence on the size of the resulting music (as well as
+its precalculation time), so this list can be useful as a guide for optimizing
+your music to take up less space.
+
+At the end, the converter prints a list of the optional features used in the
+music. Each of these features has some cost in terms of the code size of the
+player. The options are:
+
+SINE, SAWTOOTH, SQUARE, PARABOLA, TRIANGLE, NOISE:
+    The corresponding waveform is used in some instrument.
+VELOCITY: One or more notes have velocity less than 127.
+LONG_NOTES: One or more notes are longer than 127 rows.
+DELAY: The delay device is used.
+PANNING: One or more tracks have non-center panning.
+INDEXDECAY: Some instrument has IndexDecay different from 0.
+GAIN: Some instrument has Gain different from 1.
+
+
+FEEDBACK
+
+I am always very interested in hearing about your adventures with Clinkster,
+and to help out if you encounter problems.
+
+Send stories, comments, bug reports and questions to blueberry@loonies.dk or
+post them to the Pouet forum at http://pouet.net/prod.php?which=61592
+
+
+ACKNOWLEDGEMENTS
+
+Thanks to all the people who have tried out this synth (as musician and/or
+coder) and given good feedback for its development: Bstrr, Curt Cool,
+Eladamri, Farfar, Garfferen, Lemmus, Loaderror, Maytz, Psycho, Punqtured,
+Response, Xerxes, and the ones I have forgotten.
+

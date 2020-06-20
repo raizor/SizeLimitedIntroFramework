@@ -1,8 +1,8 @@
 #include "global.h"
 
-state *global::_state = 0;
+IntroState *global::_state = 0;
 
-state::state()
+IntroState::IntroState()
 {
 	matrixProjection = ZMatrix();
 	matrixProjectionInverse = ZMatrix();
@@ -11,10 +11,10 @@ state::state()
 	matrixNormal = ZMatrix();
 }
 
-state* global::GetState()
+IntroState* global::GetState()
 {
 	if (!_state)
-		_state = new state();
+		_state = new IntroState();
 	return _state;
 }
 

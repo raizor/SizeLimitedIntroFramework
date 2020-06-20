@@ -14,7 +14,6 @@
 
 #ifdef DEBUG
 	#define ENABLE_SCRUBBER
-	#define ENABLE_MUSIC	
 #else
 	#define SYNC_PLAYER
 #endif
@@ -26,4 +25,4 @@
 
 #define ENABLE_ZSTREQL
 
-//INTRO_TITLE = "XMAS 2013";
+#define INTRO_NAME_TEXT "XMAS 2013";

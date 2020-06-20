@@ -124,59 +124,58 @@ void syncDataInit()
 
 #else
 
-	syncEyeX = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "eye.x");
-	syncEyeY = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "eye.y");
-	syncEyeZ = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "eye.z");
+	syncEyeX = sync_get_track(g_pRocket, "eye.x");
+	syncEyeY = sync_get_track(g_pRocket, "eye.y");
+	syncEyeZ = sync_get_track(g_pRocket, "eye.z");
 
-	cubeX = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "cube.x");
-	cubeY = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "cube.y");
+	cubeX = sync_get_track(g_pRocket, "cube.x");
+	cubeY = sync_get_track(g_pRocket, "cube.y");
 
-	cubeZ = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "cube.z");
+	cubeZ = sync_get_track(g_pRocket, "cube.z");
 
-	rotPitch = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "rot.pitch");
-	rotRoll = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "rot.roll");
-	rotHeading = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "rot.heading");
+	rotPitch = sync_get_track(g_pRocket, "rot.pitch");
+	rotRoll = sync_get_track(g_pRocket, "rot.roll");
+	rotHeading = sync_get_track(g_pRocket, "rot.heading");
 
-	objectX = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "object.x");
-	objectY = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "object.y");
-	objectZ = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "object.z");
+	objectX = sync_get_track(g_pRocket, "object.x");
+	objectY = sync_get_track(g_pRocket, "object.y");
+	objectZ = sync_get_track(g_pRocket, "object.z");
 
-	objectMix = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "object.mix");
-	camRadius = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "cam.radius");
+	objectMix = sync_get_track(g_pRocket, "object.mix");
+	camRadius = sync_get_track(g_pRocket, "cam.radius");
 
-	terrainEffectNum = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "ter.effectNum");
+	terrainEffectNum = sync_get_track(g_pRocket, "ter.effectNum");
 
-	skyCol1_R = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sky1.r");
-	skyCol1_G = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sky1.g");
-	skyCol1_B = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sky1.b");
+	skyCol1_R = sync_get_track(g_pRocket, "sky1.r");
+	skyCol1_G = sync_get_track(g_pRocket, "sky1.g");
+	skyCol1_B = sync_get_track(g_pRocket, "sky1.b");
 
-	skyCol2_R = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sky2.r");
-	skyCol2_G = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sky2.g");
-	skyCol2_B = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sky2.b");
+	skyCol2_R = sync_get_track(g_pRocket, "sky2.r");
+	skyCol2_G = sync_get_track(g_pRocket, "sky2.g");
+	skyCol2_B = sync_get_track(g_pRocket, "sky2.b");
 
-	screenSize1 = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "screen.size1");
-	screenSize2 = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "screen.size2");
-	screenSize3 = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "screen.size3");
+	screenSize1 = sync_get_track(g_pRocket, "screen.size1");
+	screenSize2 = sync_get_track(g_pRocket, "screen.size2");
+	screenSize3 = sync_get_track(g_pRocket, "screen.size3");
 
-	screenDeform = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "screen.deform");
+	screenDeform = sync_get_track(g_pRocket, "screen.deform");
 
-	textPosX = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "txt.x");
-	textPosY = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "txt.y");
-	textPosZ = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "txt.z");
+	textPosX = sync_get_track(g_pRocket, "txt.x");
+	textPosY = sync_get_track(g_pRocket, "txt.y");
+	textPosZ = sync_get_track(g_pRocket, "txt.z");
 
-	textPos2X = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "txt2.x");
-	textPos2Y = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "txt2.y");
-	textPos2Z = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "txt2.z");
+	textPos2X = sync_get_track(g_pRocket, "txt2.x");
+	textPos2Y = sync_get_track(g_pRocket, "txt2.y");
+	textPos2Z = sync_get_track(g_pRocket, "txt2.z");
 
-	textNum = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "txt.num");
+	textNum = sync_get_track(g_pRocket, "txt.num");
+	textAmount = sync_get_track(g_pRocket, "txt.amount");
 
-	textAmount = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "txt.amount");
+	objectNum = sync_get_track(g_pRocket, "object.num");
 
-	objectNum = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "object.num");
-
-	sunPosX = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sun.x");
-	sunPosY = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sun.y");
-	sunPosZ = sync_get_track(trackNames, numKeys, values, deltaRows, interpolations, "sun.z");
+	sunPosX = sync_get_track(g_pRocket, "sun.x");
+	sunPosY = sync_get_track(g_pRocket, "sun.y");
+	sunPosZ = sync_get_track(g_pRocket, "sun.z");
 #endif
 
 }

@@ -33,21 +33,11 @@
 Scrubber* scrubber = NULL;
 
 bool addPoint = false;
-
-float introTimeSecs;
-float introLength = 0;
 bool paused;
 
 int MOUSE_X;
 int MOUSE_Y;
 bool MOUSE_DOWN;
-
-ZVector eye;
-ZVector look;
-ZVector cube;
-ZVector objectPos;
-
-HDC hDC;
 
 extern void ReloadShaders();
 
@@ -302,8 +292,6 @@ static int window_init(fwzSettings* setup)
     if( !wglMakeCurrent(setup->hDC,setup->hRC) )
         return( 0 );
 
-	hDC = setup->hDC;
-
 	SetForegroundWindow(setup->hWnd);
     	
     return( 1 );
@@ -392,7 +380,7 @@ static void DrawTime( fwzSettings *info, float t )
 		s = (int)floorf( t-60.0f*(float)m );
 		c = (int)floorf( t*100.0f ) % 100;
 		
-		sprintf( str, "%02d:%02d:%02d  [%d fps]", m, s, c, fps);
+		sprintf( str, "%s - %02d:%02d:%02d  [%d fps]", INTRO_TITLE, m, s, c, fps);
 		SetWindowText( info->hWnd, str );
 	}
 }
@@ -405,6 +393,9 @@ int WINAPI WinMain( HINSTANCE instance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     int         done=0;
 	
 	paused = false;
+
+	// set intro title
+	INTRO_TITLE = INTRO_NAME_TEXT;
 	
     RES_SETTINGS.hInstance = GetModuleHandle( 0 );
 

@@ -71,7 +71,7 @@
     <OutDir>build\bin\$(Configuration)\</OutDir>
     <IntDir>build\obj\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)framework;$(DXSDK_DIR)\Include;$(SolutionDir)framework\src;$(ProjectDir);$(SolutionDir)framework\audio\clinkster\player;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)framework;$(DXSDK_DIR)\Include;$(SolutionDir)framework\src;$(ProjectDir);$(SolutionDir)framework\audio\clinkster\clinkster\player;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)framework\libs;$(DXSDK_DIR)\Lib\x86;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)framework\build\bin\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">
@@ -86,8 +86,8 @@
     <IntDir>build\obj\release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>$(SolutionDir)framework\;$(SolutionDir)framework\src;$(DXSDK_DIR)\Include;$(ProjectDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)framework\libs;$(DXSDK_DIR)\Lib\x86;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)framework\build\bin\release - rocket;$(SolutionDir)framework\clinkster\player;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)framework;$(DXSDK_DIR)\Include;$(SolutionDir)framework\src;$(ProjectDir);$(SolutionDir)framework\audio\clinkster\clinkster\player;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)framework\libs;$(DXSDK_DIR)\Lib\x86;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)framework\build\bin\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_FastPack|Win32'">
     <OutDir>build\bin\release\</OutDir>
@@ -112,7 +112,7 @@
       <PreprocessorDefinitions>_DEBUG;WINDOWS;DEBUG;SIMD;A32BITS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>.\bin/Debug/i4k_OGL_vc2008.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>./build/bin/Debug/i4k_OGL_vc2008.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>$(OutDir)</AssemblerListingLocation>
       <ObjectFileName>$(OutDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)</ProgramDataBaseFileName>
@@ -248,7 +248,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;msvcrt_old.lib;framework8k.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;msvcrt_old.lib;framework.lib;d3d9.lib;d3dx9.lib;sync.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -348,7 +348,6 @@
     </ClInclude>
     <ClInclude Include="effects\terrain\particles.h" />
     <ClInclude Include="music\sync_rocket.h" />
-    <ClInclude Include="shaders\shader_code.h" />
     <ClInclude Include="shader_code_intro.h" />
     <ClInclude Include="effects\terrain\text3d.h" />
   </ItemGroup>
@@ -385,7 +384,18 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release - Rocket|Win32'">music.obj</Outputs>
     </CustomBuild>
     <None Include="music\clinkster.inc" />
-    <None Include="shaders\tex.frag" />
+    <None Include="shaders\include\blit.frag" />
+    <None Include="shaders\include\blit.vert" />
+    <None Include="shaders\include\particles.frag" />
+    <None Include="shaders\include\particles.geom" />
+    <None Include="shaders\include\particles.vert" />
+    <None Include="shaders\include\terrainTest.frag" />
+    <None Include="shaders\include\terrainTest.vert" />
+    <None Include="shaders\include\tv.fs.glsl" />
+    <None Include="shaders\include\tv.vs.glsl" />
+    <None Include="shaders\include\txt.frag" />
+    <None Include="shaders\include\txt.vert" />
+    <None Include="shaders\pack.bat" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="music\clinkster.obj" />
