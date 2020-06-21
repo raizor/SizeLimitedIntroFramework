@@ -7,8 +7,8 @@
 
 #include "device.h"
 #include "sync.h"
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 static const char *sync_track_path(const char *base, const char *name)
 {
@@ -85,13 +85,13 @@ static SOCKET server_connect(const char *host, unsigned short nport)
 }
 
 #else
-
+/*
 void sync_set_io_cb(struct sync_device *d, struct sync_io_cb *cb)
 {
 	d->io_cb.open = cb->open;
 	d->io_cb.read = cb->read;
 	d->io_cb.close = cb->close;
-}
+}*/
 
 #endif
 
@@ -114,9 +114,9 @@ struct sync_device *sync_create_device(const char *base)
 	d->row = -1;
 	d->sock = INVALID_SOCKET;
 #else
-	d->io_cb.open = fopen;
-	d->io_cb.read = fread;
-	d->io_cb.close = fclose;
+	//d->io_cb.open = fopen;
+	//d->io_cb.read = fread;
+	//d->io_cb.close = fclose;
 #endif
 
 	return d;

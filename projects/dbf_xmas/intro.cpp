@@ -21,7 +21,7 @@
 #include "framework/gl/fbo.h"
 
 
-#include "effects/terrain/terrain.h"
+#include "effects/snowscene//effect_snowscene.h"
 
 #ifndef SYNC_PLAYER	
 	#include "../rocket/sync/device.h"
@@ -41,7 +41,7 @@ float introLength = 0;
 GLuint vertexBufferPointGridID = 0;
 GLuint vertexBufferQuadID = 0;
 
-terrain* effectTerrain;
+effect_showscene* effectSnowscene;
 
 double rocketRow;
 
@@ -134,7 +134,7 @@ void intro_init( void )
 	FBO = new ZFbo(ZFboDesc((int)(RES_X*1.0), (int)(RES_Y*1.0), 0, GL_RGBA, GL_RGBA32F_ARB, GL_FLOAT, 1, true, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D));
 	FBO_CULLING = new ZFbo(ZFboDesc((int)(RES_X*1.0), (int)(RES_Y*1.0), 0, GL_RGBA, GL_RGBA32F_ARB, GL_FLOAT, 1, true, GL_DEPTH_COMPONENT32, GL_FLOAT, false, GL_TEXTURE_2D));
 
-	effectTerrain = new terrain();
+	effectSnowscene = new effect_showscene();
 }
 
 #ifdef DEBUG
@@ -143,7 +143,7 @@ void intro_init( void )
 	{
 		//shaderSpinner->reload();
 		//ppSsao->prog->reload();
-		effectTerrain->reload();
+		effectSnowscene->reload();
 	}
 
 #endif
@@ -259,7 +259,7 @@ void intro_do( float itime )
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity();
 				
-	effectTerrain->draw(itime);
+	effectSnowscene->draw(itime);
 
 	DrawFbo(itime);
 }

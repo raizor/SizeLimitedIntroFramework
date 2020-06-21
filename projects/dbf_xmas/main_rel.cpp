@@ -113,8 +113,8 @@ static int window_init(fwzSettings* setup)
 #endif
 	rec.left   = 0;
 	rec.top    = 0;
-	rec.right  = 800;
-	rec.bottom = 600;
+	rec.right = setup->scrWidth;
+	rec.bottom = setup->scrHeight;
 
 #ifdef ALLOWWINDOWED
 	AdjustWindowRect( &rec, dwStyle, 0 );

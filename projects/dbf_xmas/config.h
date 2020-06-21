@@ -14,8 +14,6 @@
 
 #ifdef DEBUG
 	#define ENABLE_SCRUBBER
-#else
-	#define SYNC_PLAYER
 #endif
 
 #define CLINKSTER_EVENTS

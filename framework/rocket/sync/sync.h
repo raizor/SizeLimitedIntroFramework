@@ -31,7 +31,7 @@ struct sync_io_cb {
 	size_t (*read)(void *ptr, size_t size, size_t nitems, void *stream);
 	int (*close)(void *stream);
 };
-void sync_set_io_cb(struct sync_device *d, struct sync_io_cb *cb);
+//void sync_set_io_cb(struct sync_device *d, struct sync_io_cb *cb);
 #endif /* defined(SYNC_PLAYER) */
 
 #ifndef SYNC_PLAYER

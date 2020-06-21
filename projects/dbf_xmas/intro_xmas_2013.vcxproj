@@ -78,8 +78,8 @@
     <OutDir>build\bin\$(Configuration)\</OutDir>
     <IntDir>build\obj\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(DXSDK_DIR)\Include;$(SolutionDir)framework;$(SolutionDir)framework\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)framework\libs;$(DXSDK_DIR)\Lib\x86;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)framework\build\bin\release debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)framework;$(DXSDK_DIR)\Include;$(SolutionDir)framework\src;$(ProjectDir);$(SolutionDir)framework\audio\clinkster\clinkster\player;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)framework\libs;$(DXSDK_DIR)\Lib\x86;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)framework\build\bin\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>build\bin\release\</OutDir>
@@ -164,7 +164,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WINDOWS;SIMD;A32BITS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SYNC_PLAYER;WINDOWS;SIMD;A32BITS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>.\bin/Debug/i4k_OGL_vc2008.pch</PrecompiledHeaderOutputFile>
@@ -185,7 +185,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;Ws2_32.lib;dsound.lib;bass.lib;Shlwapi.lib;framework8k.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;Ws2_32.lib;dsound.lib;bass.lib;Shlwapi.lib;framework.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -220,12 +220,12 @@
     </Midl>
     <ClCompile>
       <AdditionalOptions>/QIfist /Gs  %(AdditionalOptions)</AdditionalOptions>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>MinSpace</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <AdditionalIncludeDirectories>../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WINDOWS;A32BITS;SIMD;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SYNC_PLAYER;WINDOWS;A32BITS;SIMD;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling />
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -248,7 +248,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;msvcrt_old.lib;framework.lib;d3d9.lib;d3dx9.lib;sync.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;winmm.lib;msvcrt_old.lib;d3d9.lib;d3dx9.lib;sync.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -269,7 +269,7 @@
       <Command>$(SolutionDir)framework\minifier\shader_minifier.exe -o shader_code_intro.h --input-dir $(ProjectDir)shaders\include --preserve-externals --const --no-renaming --no-sequence</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(SolutionDir)\tools\kkrunchy_023a4_asm07.exe $(TargetDir)intro_xmas_2013.exe --best --out $(TargetDir)packed.exe</Command>
+      <Command>$(SolutionDir)\tools\squishy\squishy-x86.exe -i $(TargetDir)intro_xmas_2013.exe -o $(TargetDir)crunched.exe</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_FastPack|Win32'">
@@ -341,19 +341,19 @@
   <ItemGroup>
     <ClInclude Include="config.h" />
     <ClInclude Include="direct3d.h" />
-    <ClInclude Include="effects\terrain\terrain.h" />
+    <ClInclude Include="effects\snowscene\effect_snowscene.h" />
     <ClInclude Include="intro.h" />
     <ClInclude Include="music\syncData.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_FastPack|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="effects\terrain\particles.h" />
+    <ClInclude Include="effects\snowscene\particles.h" />
     <ClInclude Include="music\sync_rocket.h" />
     <ClInclude Include="shader_code_intro.h" />
-    <ClInclude Include="effects\terrain\text3d.h" />
+    <ClInclude Include="effects\snowscene\text3d.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="direct3d.cpp" />
-    <ClCompile Include="effects\terrain\terrain.cpp" />
+    <ClCompile Include="effects\snowscene\effect_snowscene.cpp" />
     <ClCompile Include="intro.cpp" />
     <ClCompile Include="main_deb.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -367,9 +367,9 @@
     <ClCompile Include="music\syncData.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_FastPack|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="effects\terrain\particles.cpp" />
+    <ClCompile Include="effects\snowscene\particles.cpp" />
     <ClCompile Include="music\sync_rocket.cpp" />
-    <ClCompile Include="effects\terrain\text3d.cpp" />
+    <ClCompile Include="effects\snowscene\text3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="clinkster\player\clinkster.inc" />

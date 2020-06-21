@@ -203,12 +203,12 @@
     </Midl>
     <ClCompile>
       <AdditionalOptions>/QIfist /Gs  %(AdditionalOptions)</AdditionalOptions>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>MinSpace</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <AdditionalIncludeDirectories>../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WINDOWS;A32BITS;SIMD;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SYNC_PLAYER;WINDOWS;A32BITS;SIMD;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling />
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -250,15 +250,14 @@
     <PreBuildEvent>
       <Command>$(SolutionDir)framework\minifier\shader_minifier.exe -o framework/gl/shaders/shader_code_framework.h --input-dir $(ProjectDir)framework/gl/shaders/include --preserve-externals --const --no-renaming --no-sequence</Command>
     </PreBuildEvent>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="audio\clinkster\AudioHelper_Clinkster.h" />
     <ClInclude Include="framework\dialog\fwzSetup.h" />
     <ClInclude Include="framework\dialog\resource.h" />
-    <ClInclude Include="framework\effects\pp\fxaa\fxaa.h" />
-    <ClInclude Include="framework\effects\pp\ssao\ssao.h" />
-    <ClInclude Include="framework\effects\pp\tv\tv.h" />
-    <ClInclude Include="framework\gl\shaders\shader_code_framework.h" />
     <ClInclude Include="framework\zassert.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="rocket\rocketControl.h">
@@ -275,18 +274,26 @@
     <ClInclude Include="framework\assert.h" />
     <ClInclude Include="framework\debug\audio.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="framework\debug\bass.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="framework\debug\debugHelpers.h" />
+    <ClInclude Include="framework\debug\debugHelpers.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="framework\debug\scrubber.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="framework\debug\watchfile.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="framework\effects\effect.h" />
+    <ClInclude Include="framework\effects\effect.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="framework\gl\fbo.h" />
     <ClInclude Include="framework\gl\gl8k.h" />
     <ClInclude Include="framework\gl\glext.h" />
@@ -295,9 +302,6 @@
     <ClInclude Include="framework\math\vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="framework\effects\pp\fxaa\fxaa.cpp" />
-    <ClCompile Include="framework\effects\pp\ssao\ssao.cpp" />
-    <ClCompile Include="framework\effects\pp\tv\tv.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="rocket\rocketControl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">false</ExcludedFromBuild>
@@ -307,9 +311,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="rocket\sync\device.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="rocket\sync\track.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -318,15 +320,22 @@
     <ClCompile Include="framework\gl\shader.cpp" />
     <ClCompile Include="framework\debug\audio.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="framework\debug\debugHelpers.cpp" />
+    <ClCompile Include="framework\debug\debugHelpers.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="framework\debug\scrubber.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="framework\debug\watchfile.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="framework\effects\effect.cpp" />
+    <ClCompile Include="framework\effects\effect.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="framework\gl\fbo.cpp" />
     <ClCompile Include="framework\gl\gl8k.cpp" />
     <ClCompile Include="framework\utils8k.cpp" />

@@ -7,6 +7,8 @@
 #include "framework/zassert.h"
 #include "framework/dialog/fwzSetup.h"
 
+#define _WINSOCK_DEPCRECATED 
+
 #define ENABLE_PP 1
 
 #define M_PI 3.141926
@@ -17,8 +19,6 @@
 
 #ifdef DEBUG
 #define ENABLE_SCRUBBER
-#else
-#define SYNC_PLAYER
 #endif
 
 #define CLINKSTER_EVENTS
