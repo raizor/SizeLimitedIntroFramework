@@ -376,11 +376,21 @@
     <ClInclude Include="effects\snowscene\particles.h" />
     <ClInclude Include="music\sync_rocket.h" />
     <ClInclude Include="rocket\rocketControl.h" />
-    <ClInclude Include="rocket\sync\base.h" />
-    <ClInclude Include="rocket\sync\data.h" />
-    <ClInclude Include="rocket\sync\device.h" />
-    <ClInclude Include="rocket\sync\sync.h" />
-    <ClInclude Include="rocket\sync\track.h" />
+    <ClInclude Include="rocket\sync\base.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="rocket\sync\data.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="rocket\sync\device.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="rocket\sync\sync.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="rocket\sync\track.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="shader_code_intro.h" />
     <ClInclude Include="effects\snowscene\text3d.h" />
   </ItemGroup>
@@ -424,9 +434,15 @@
     <ClCompile Include="music\sync_rocket.cpp" />
     <ClCompile Include="effects\snowscene\text3d.cpp" />
     <ClCompile Include="rocket\rocketControl.cpp" />
-    <ClCompile Include="rocket\sync\data.c" />
-    <ClCompile Include="rocket\sync\device.c" />
-    <ClCompile Include="rocket\sync\track.c" />
+    <ClCompile Include="rocket\sync\data.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="rocket\sync\device.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="rocket\sync\track.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="clinkster\player\clinkster.inc" />
